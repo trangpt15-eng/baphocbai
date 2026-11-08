@@ -74,15 +74,15 @@ label{font-size:.9rem;color:var(--soft)}
 <img class="stk deco2" data-img="cloud" alt="">
 <div class="wrap">
   <div class="head">
-    <h1 id="title">Góc học của con</h1>
+    <h1 id="title">°❀⋆Bắp Học Bài Nè.ೃ࿔*:･</h1>
     <p class="sub" id="today"></p>
     <img class="stk duck" data-img="duck" alt="">
   </div>
   <nav>
-    <button data-v="home" class="on">📅 Lịch tuần</button>
-    <button data-v="type">⌨️ Luyện gõ</button>
-    <button data-v="stats">📈 Tiến bộ</button>
-    <button data-v="admin">🔒 Ba mẹ</button>
+    <button data-v="home" class="on">˖ ݁♬⋆ Lịch tuần.˚𝄞</button>
+    <button data-v="type">. ݁₊ ⊹ . ݁ ⟡ ݁ Luyện typing . ⊹ ₊ ݁.</button>
+    <button data-v="stats">.⋆❀° Tiến bộ .⋆❀°</button>
+    <button data-v="admin">୨ৎ Mẹ Chan ୨ৎ</button>
   </nav>
 
   <section id="v-home">
@@ -104,13 +104,13 @@ label{font-size:.9rem;color:var(--soft)}
       <div class="card"><img class="ic" data-img="strawberry" alt=""><b>Mục tiêu hôm nay: <span id="goaltxt">15</span> phút</b>
         <div class="bar" style="margin-top:8px"><i id="tbar" style="width:0"></i></div>
         <small id="tmin" class="sub"></small></div>
-      <div class="card"><img class="ic" data-img="candy" alt=""><b>Chọn bài để gõ</b><div id="lessons"></div></div>
+      <div class="card"><img class="ic" data-img="candy" alt=""><b>Chọn bài để type</b><div id="lessons"></div></div>
     </div>
     <div id="play" class="hide">
       <div id="stage"><div class="veil"></div>
         <div class="top"><button class="btn sm" id="back">← Chọn bài khác</button><div class="clock" id="clock">00:00</div><button class="btn sm main" id="stop">Xong bài</button></div>
         <div id="text"></div>
-        <small>Bấm vào chữ rồi gõ nhé. Chữ sai sẽ đổi màu hồng 💗</small>
+        <small>⋆｡˚ ☁︎ ˚｡⋆｡˚☽˚｡⋆⋆｡˚ ☁︎ ˚｡⋆｡˚☽˚｡⋆</small>
         <textarea id="inp" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
       </div>
       <audio id="aud" loop></audio>
@@ -125,20 +125,20 @@ label{font-size:.9rem;color:var(--soft)}
   </section>
 
   <section id="v-admin" class="hide">
-    <div id="lock" class="card"><b>Khu vực của ba mẹ</b><br><label>Nhập mã PIN (mặc định 1234)</label>
+    <div id="lock" class="card"><b>Khu vực của mẹ Chan</b><br><label>Nhập mã PIN</label>
       <input type="text" id="pin" inputmode="numeric"><button class="btn main" id="unlock">Mở khóa</button></div>
     <div id="panel" class="hide">
-      <div class="card"><img class="ic" data-img="bow" alt=""><b>Việc mặc định theo thứ</b>
+      <div class="card"><img class="ic" data-img="bow" alt=""><b>Daily Tasks</b>
         <label>Xem / sửa ngày</label><select id="aday"></select>
         <div id="atasks"></div>
         <label>Thêm việc mới</label><input type="text" id="ntask" placeholder="vd: Đọc 10 trang sách">
-        <label>Nếu là mục luyện gõ, nhập số phút (bỏ trống nếu là việc thường)</label><input type="number" id="nmin" min="1">
+        <label>Nếu là mục luyện gõ, nhập số phút </label><input type="number" id="nmin" min="1">
         <label>Áp dụng cho</label><select id="ato"></select>
         <button class="btn main sm" id="addtask">+ Thêm việc</button></div>
-      <div class="card"><img class="ic" data-img="icecream" alt=""><b>Bài luyện gõ</b><div id="alessons"></div></div>
+      <div class="card"><img class="ic" data-img="icecream" alt=""><b>Bài luyện typing</b><div id="alessons"></div></div>
       <div class="card"><b id="ftitle">Thêm bài mới</b>
         <label>Tên bài</label><input type="text" id="lt">
-        <label>Nội dung để con gõ</label><textarea id="lx" rows="4"></textarea>
+        <label>Nội dung để con type</label><textarea id="lx" rows="4"></textarea>
         <label>Link hình nền (URL ảnh, có thể bỏ trống)</label><input type="text" id="lb">
         <label>Link nhạc (URL file mp3, có thể bỏ trống)</label><input type="text" id="lm">
         <button class="btn main" id="savel">Lưu bài</button> <button class="btn sm" id="clearl">Làm mới</button></div>
@@ -162,11 +162,11 @@ const DN=['CN','T2','T3','T4','T5','T6','T7'];
 const DFULL=['Chủ nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
 const mk=(id,text,typing)=>typing?{id,text,typing}:{id,text};
 const weekday=()=>[mk('btvn','Làm bài tập về nhà'),mk('type','Luyện gõ 15 phút',15)];
-const DEF={name:'Góc học của con',pin:'1234',
+const DEF={name:'°❀⋆Bắp Học Bài Nè.ೃ࿔*:･',pin:'1234',
  sched:{1:weekday(),2:weekday(),3:weekday(),4:weekday(),5:weekday(),
   6:[mk('bee','Làm Beehive online'),mk('type','Luyện gõ 30 phút',30),mk('fly','Luyện thi Flyers')],
   0:[mk('vio','Vioedu'),mk('ioe','IOE'),mk('type','Luyện gõ 30 phút',30),mk('fly','Luyện thi Flyers')]},
- lessons:[{id:'l1',title:'Bài mẫu: Lời chào',text:'Chào buổi sáng! Hôm nay con sẽ học thật vui và thật chăm chỉ.',bg:'bg',music:''}],
+ lessons:[{id:'l1',title:'Bài mẫu: Lời chào',text:'Chào buổi sáng! Hôm nay Bắp sẽ học thật vui và thật chăm chỉ.',bg:'bg',music:''}],
  checks:{},results:[]};
 let S;
 try{S=JSON.parse(localStorage.getItem(KEY))||null}catch(e){S=null}
