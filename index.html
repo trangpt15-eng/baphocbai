@@ -74,16 +74,16 @@ label{font-size:.9rem;color:var(--soft)}
 <img class="stk deco2" data-img="cloud" alt="">
 <div class="wrap">
   <div class="head">
-    <h1 id="title">Góc học của con</h1>
+    <h1 id="title">Bắp học bài nè</h1>
     <p class="sub" id="today"></p>
     <p class="sub" id="sync" style="font-size:.8rem;margin:-6px 0 8px"></p>
     <img class="stk duck" data-img="duck" alt="">
   </div>
   <nav>
-    <button data-v="home" class="on">📅 Lịch tuần</button>
-    <button data-v="type">⌨️ Luyện gõ</button>
-    <button data-v="stats">📈 Tiến bộ</button>
-    <button data-v="admin">🔒 Ba mẹ</button>
+    <button data-v="home" class="on">˚₊‧꒰ა Lịch tuần ໒꒱ ‧₊˚</button>
+    <button data-v="type">𑣲⋆Luyện typing⋆𑣲</button>
+    <button data-v="stats">𝄞⨾𓍢ִ໋Tiến bộ𝄞⨾𓍢ִ໋</button>
+    <button data-v="admin">𝄞⨾𓍢ִ໋Mẹ Chan𝄞⨾𓍢ִ໋</button>
   </nav>
 
   <section id="v-home">
@@ -105,13 +105,13 @@ label{font-size:.9rem;color:var(--soft)}
       <div class="card"><img class="ic" data-img="strawberry" alt=""><b>Mục tiêu hôm nay: <span id="goaltxt">15</span> phút</b>
         <div class="bar" style="margin-top:8px"><i id="tbar" style="width:0"></i></div>
         <small id="tmin" class="sub"></small></div>
-      <div class="card"><img class="ic" data-img="candy" alt=""><b>Chọn bài để gõ</b><div id="lessons"></div></div>
+      <div class="card"><img class="ic" data-img="candy" alt=""><b>Chọn bài để luyện typing</b><div id="lessons"></div></div>
     </div>
     <div id="play" class="hide">
       <div id="stage"><div class="veil"></div>
         <div class="top"><button class="btn sm" id="back">← Chọn bài khác</button><div class="clock" id="clock">00:00</div><button class="btn sm main" id="stop">Xong bài</button></div>
         <div id="text"></div>
-        <small>Bấm vào chữ rồi gõ nhé. Chữ sai sẽ đổi màu hồng 💗</small>
+        <small>°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･°❀⋆.ೃ࿔*:･</small>
         <textarea id="inp" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
       </div>
       <audio id="aud" loop></audio>
@@ -126,26 +126,26 @@ label{font-size:.9rem;color:var(--soft)}
   </section>
 
   <section id="v-admin" class="hide">
-    <div id="lock" class="card"><b>Khu vực của ba mẹ</b><br><label>Nhập mã PIN (mặc định 1234)</label>
+    <div id="lock" class="card"><b>Để đó cho mẹ</b><br><label>Nhập mật khẩu</label>
       <input type="text" id="pin" inputmode="numeric"><button class="btn main" id="unlock">Mở khóa</button></div>
     <div id="panel" class="hide">
-      <div class="card"><img class="ic" data-img="bow" alt=""><b>Việc mặc định theo thứ</b>
+      <div class="card"><img class="ic" data-img="bow" alt=""><b>Daily Tasks</b>
         <label>Xem / sửa ngày</label><select id="aday"></select>
         <div id="atasks"></div>
         <label>Thêm việc mới</label><input type="text" id="ntask" placeholder="vd: Đọc 10 trang sách">
-        <label>Nếu là mục luyện gõ, nhập số phút (bỏ trống nếu là việc thường)</label><input type="number" id="nmin" min="1">
+        <label>Nhập số phút luyện typing</label><input type="number" id="nmin" min="1">
         <label>Áp dụng cho</label><select id="ato"></select>
         <button class="btn main sm" id="addtask">+ Thêm việc</button></div>
-      <div class="card"><img class="ic" data-img="icecream" alt=""><b>Bài luyện gõ</b><div id="alessons"></div></div>
+      <div class="card"><img class="ic" data-img="icecream" alt=""><b>Bài luyện typing</b><div id="alessons"></div></div>
       <div class="card"><b id="ftitle">Thêm bài mới</b>
         <label>Tên bài</label><input type="text" id="lt">
-        <label>Nội dung để con gõ</label><textarea id="lx" rows="4"></textarea>
+        <label>Nội dung để con luyện typing</label><textarea id="lx" rows="4"></textarea>
         <label>Link hình nền (URL ảnh, có thể bỏ trống)</label><input type="text" id="lb">
         <label>Link nhạc (URL file mp3, có thể bỏ trống)</label><input type="text" id="lm">
         <button class="btn main" id="savel">Lưu bài</button> <button class="btn sm" id="clearl">Làm mới</button></div>
       <div class="card"><b>Cài đặt</b><br>
         <label>Tên hiển thị</label><input type="text" id="sname">
-        <label>Đổi mã PIN (bỏ trống nếu không đổi)</label><input type="text" id="spin">
+        <label>Đổi mật khẩu</label><input type="text" id="spin">
         <button class="btn main sm" id="ssave">Lưu cài đặt</button><hr style="border:0;border-top:2px dashed var(--line);margin:14px 0">
         <button class="btn sm" id="exp">⬇ Sao lưu dữ liệu</button>
         <label class="btn sm" style="display:inline-block">⬆ Khôi phục<input type="file" id="imp" accept=".json" hidden></label>
@@ -163,11 +163,11 @@ const KEY='goc-hoc-v2';
 const DN=['CN','T2','T3','T4','T5','T6','T7'];
 const DFULL=['Chủ nhật','Thứ 2','Thứ 3','Thứ 4','Thứ 5','Thứ 6','Thứ 7'];
 const mk=(id,text,typing)=>typing?{id,text,typing}:{id,text};
-const weekday=()=>[mk('btvn','Làm bài tập về nhà'),mk('type','Luyện gõ 15 phút',15)];
-const DEF={name:'Góc học của con',pin:'1234',
+const weekday=()=>[mk('btvn','Làm bài tập về nhà'),mk('type','Luyện typing 15 phút',15)];
+const DEF={name:'Bắp Học Bài Nè',pin:'1234',
  sched:{1:weekday(),2:weekday(),3:weekday(),4:weekday(),5:weekday(),
-  6:[mk('bee','Làm Beehive online'),mk('type','Luyện gõ 30 phút',30),mk('fly','Luyện thi Flyers')],
-  0:[mk('vio','Vioedu'),mk('ioe','IOE'),mk('type','Luyện gõ 30 phút',30),mk('fly','Luyện thi Flyers')]},
+  6:[mk('bee','Làm Beehive online'),mk('type','Luyện typing 30 phút',30),mk('fly','Luyện thi Flyers')],
+  0:[mk('vio','Vioedu'),mk('ioe','IOE'),mk('type','Luyện typing 30 phút',30),mk('fly','Luyện thi Flyers')]},
  lessons:[{id:'l1',title:'Bài mẫu: Lời chào',text:'Chào buổi sáng! Hôm nay con sẽ học thật vui và thật chăm chỉ.',bg:'bg',music:''}],
  checks:{},results:[]};
 let S;
@@ -222,7 +222,7 @@ function renderDay(){
   $('dtitle').textContent=`${DFULL[d.getDay()]}, ${d.getDate()}/${d.getMonth()+1}${sel===TODAY?' (hôm nay)':''}`;
   $('list').innerHTML=ts.map(t=>{const on=isDone(sel,t);
     return t.typing
-     ?`<div class="task ${on?'done':''}" data-go="1"><input type="checkbox" disabled ${on?'checked':''}><span>⌨️ ${esc(t.text)}<small>Đã gõ ${(typedSecs(sel)/60).toFixed(1)}/${t.typing} phút — bấm để vào luyện</small></span></div>`
+     ?`<div class="task ${on?'done':''}" data-go="1"><input type="checkbox" disabled ${on?'checked':''}><span>⌨️ ${esc(t.text)}<small>Đã luyện ${(typedSecs(sel)/60).toFixed(1)}/${t.typing} phút — bấm để vào luyện</small></span></div>`
      :`<label class="task ${on?'done':''}"><input type="checkbox" data-id="${t.id}" ${on?'checked':''} ${future?'disabled':''}><span>${esc(t.text)}</span></label>`}).join('')||'<p class="sub">Ngày này chưa có việc nào.</p>';
   $('list').querySelectorAll('input[data-id]').forEach(i=>i.onchange=()=>{
     S.checks[sel]=S.checks[sel]||{};S.checks[sel][i.dataset.id]=i.checked;saveCheck(sel,i.dataset.id,i.checked);renderHome()});
@@ -231,7 +231,7 @@ function renderDay(){
   $('pct').textContent=future?'Chưa đến ngày này':p===100?'Hoàn thành hết rồi, giỏi quá! 🌟':`Xong ${p}%`;
 }
 
-/* ---------- Luyện gõ ---------- */
+/* ---------- Luyện Typing ---------- */
 function bestOf(l){
   const rs=S.results.filter(r=>r.lessonId===l.id||(!r.lessonId&&r.lesson===l.title));
   if(!rs.length)return null;
@@ -241,9 +241,9 @@ function renderPick(){
   $('result').classList.add('hide');$('pick').classList.remove('hide');$('play').classList.add('hide');
   const g=goalFor(TODAY),m=typedSecs(TODAY)/60;
   $('goaltxt').textContent=g;$('tbar').style.width=Math.min(100,m/g*100)+'%';
-  $('tmin').textContent=`Đã gõ ${m.toFixed(1)} / ${g} phút`;
+  $('tmin').textContent=`Đã luyện ${m.toFixed(1)} / ${g} phút`;
   $('lessons').innerHTML=S.lessons.length?S.lessons.map(l=>{const p=bestOf(l);
-    return `<div class="lesson ${p?'done':''}"><span>${p?'✅':'📖'} ${esc(l.title)}${p?`<small>Cao nhất: <b>${p.best.wpm}</b> từ/phút · <b>${p.best.acc}%</b> chính xác · đã gõ ${p.n} lần</small>`:''}</span><button class="btn ${p?'':'main'} sm" data-play="${l.id}">${p?'Gõ lại':'Bắt đầu'}</button></div>`}).join(''):'Chưa có bài nào. Nhờ ba mẹ thêm bài nhé!';
+    return `<div class="lesson ${p?'done':''}"><span>${p?'✅':'📖'} ${esc(l.title)}${p?`<small>Cao nhất: <b>${p.best.wpm}</b> từ/phút · <b>${p.best.acc}%</b> chính xác · đã luyện ${p.n} lần</small>`:''}</span><button class="btn ${p?'':'main'} sm" data-play="${l.id}">${p?'typing lại':'Bắt đầu'}</button></div>`}).join(''):'Chưa có bài nào. Nhờ ba mẹ thêm bài nhé!';
   $('lessons').querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>startLesson(b.dataset.play));
 }
 let L,txt,started,t0,tick,errs,keys,secs,finished,prev='';
@@ -281,9 +281,9 @@ function finish(){
   const rec={date:TODAY,lesson:L.title,lessonId:L.id,wpm,acc,secs,at:Date.now()};S.results.push(rec);saveResult(rec);prev='';
   $('play').classList.add('hide');$('result').classList.remove('hide');
   $('result').innerHTML=`<img class="stk" src="${IMG.star}" alt="" style="width:60px;right:12px;top:-18px"><h2 style="margin-top:0">Giỏi quá! 🎉</h2><div class="res">
-   <div><b>${wpm}</b>từ/phút</div><div><b>${acc}%</b>chính xác</div><div><b>${fmt(secs)}</b>thời gian</div><div><b>${errs}</b>lần gõ sai</div></div>
+   <div><b>${wpm}</b>từ/phút</div><div><b>${acc}%</b>chính xác</div><div><b>${fmt(secs)}</b>thời gian</div><div><b>${errs}</b>lần bấm sai</div></div>
    <p>${best===null?'Lần đầu con làm bài này, cố lên nhé!':(wpm>best?'Nhanh hơn kỷ lục cũ rồi 🚀':'Con thử phá kỷ lục '+best+' từ/phút nhé!')}</p>
-   <button class="btn main" id="again">Gõ tiếp</button> <button class="btn" id="home">Về lịch tuần</button>`;
+   <button class="btn main" id="again">Luyện typing tiếp</button> <button class="btn" id="home">Về lịch tuần</button>`;
   $('again').onclick=renderPick;$('home').onclick=()=>view('home');
 }
 
@@ -305,9 +305,9 @@ function renderStats(){
   $('sbox').innerHTML=`<div class="res" style="margin-top:12px">
    <div><b>${cur.wpm}</b>từ/phút<br>${delta(cur.wpm,pre.wpm,'')} so với ${lbl}</div>
    <div><b>${cur.acc}%</b>chính xác<br>${delta(cur.acc,pre.acc,'%')}</div>
-   <div><b>${cur.mins}</b>phút đã gõ<br>${delta(cur.mins,pre.mins,'')}</div>
+   <div><b>${cur.mins}</b>phút đã <br>${delta(cur.mins,pre.mins,'')}</div>
    <div><b>${cur.done}%</b>hoàn thành việc<br>${delta(cur.done,pre.done,'%')}</div></div>
-   <p style="margin-bottom:0"><small>Tốc độ gõ trung bình mỗi ngày</small></p>
+   <p style="margin-bottom:0"><small>Tốc độ typing trung bình mỗi ngày</small></p>
    <div class="cols">${dw.map((w,i)=>`<div title="${cur.days[i]}: ${w} từ/phút" style="height:${w/mx*100}%"></div>`).join('')}</div>
    <p>${cur.rs.length===0?'Chưa có bài nào trong giai đoạn này.':cur.wpm>=pre.wpm&&cur.acc>=pre.acc?'Con đang tiến bộ rất tốt! 🌟':'Lúc lên lúc xuống là bình thường, cứ đều đặn mỗi ngày nhé 💪'}</p>`;
 }
@@ -357,10 +357,10 @@ function refresh(){
 window.getState=()=>S;
 window.onCloudData=d=>{
   S=Object.assign({name:DEF.name,pin:DEF.pin,sched:DEF.sched,lessons:[],checks:{},results:[]},d);
-  cache();$('sync').textContent='☁️ Đã kết nối: dữ liệu lưu trên mạng, mở máy nào cũng thấy';refresh();
+  cache();$('sync').textContent='☁️ Đã kết nối';refresh();
 };
 window.onCloudError=cloudErr;
-$('sync').textContent=window.FIREBASE_CONFIG?'Đang kết nối mạng...':'💾 Đang lưu trên máy này (chưa nối Firebase)';
+$('sync').textContent=window.FIREBASE_CONFIG?'Đang kết nối mạng...':'💾 Đang lưu trên máy (chưa nối Firebase)';
 view('home');
 </script>
 <script type="module">
