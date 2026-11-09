@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
-<head>
+<head>f
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Góc học của con</title>
+<title>Bắp Học Bài Nè</title>
 <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#6a4a62;--soft:#b190a8;--pink:#ffc2d9;--pink2:#ff9fc0;--mint:#c5ecd9;--sky:#bde0fe;--lemon:#fff1b8;--card:rgba(255,255,255,.88);--line:#f6d9e5;--bad:#c0334f;--badbg:#ffd0da}
@@ -282,7 +282,7 @@ function finish(){
   $('play').classList.add('hide');$('result').classList.remove('hide');
   $('result').innerHTML=`<img class="stk" src="${IMG.star}" alt="" style="width:60px;right:12px;top:-18px"><h2 style="margin-top:0">Giỏi quá! 🎉</h2><div class="res">
    <div><b>${wpm}</b>từ/phút</div><div><b>${acc}%</b>chính xác</div><div><b>${fmt(secs)}</b>thời gian</div><div><b>${errs}</b>lần bấm sai</div></div>
-   <p>${best===null?'Lần đầu con làm bài này, cố lên nhé!':(wpm>best?'Nhanh hơn kỷ lục cũ rồi 🚀':'Con thử phá kỷ lục '+best+' từ/phút nhé!')}</p>
+   <p>${best===null?'Lần đầu Bắp làm bài này, cố lên nhé!':(wpm>best?'Nhanh hơn kỷ lục cũ rồi 🚀':'Bắp thử phá kỷ lục '+best+' từ/phút nhé!')}</p>
    <button class="btn main" id="again">Luyện typing tiếp</button> <button class="btn" id="home">Về lịch tuần</button>`;
   $('again').onclick=renderPick;$('home').onclick=()=>view('home');
 }
@@ -309,7 +309,7 @@ function renderStats(){
    <div><b>${cur.done}%</b>hoàn thành việc<br>${delta(cur.done,pre.done,'%')}</div></div>
    <p style="margin-bottom:0"><small>Tốc độ typing trung bình mỗi ngày</small></p>
    <div class="cols">${dw.map((w,i)=>`<div title="${cur.days[i]}: ${w} từ/phút" style="height:${w/mx*100}%"></div>`).join('')}</div>
-   <p>${cur.rs.length===0?'Chưa có bài nào trong giai đoạn này.':cur.wpm>=pre.wpm&&cur.acc>=pre.acc?'Con đang tiến bộ rất tốt! 🌟':'Lúc lên lúc xuống là bình thường, cứ đều đặn mỗi ngày nhé 💪'}</p>`;
+   <p>${cur.rs.length===0?'Chưa có bài nào trong giai đoạn này.':cur.wpm>=pre.wpm&&cur.acc>=pre.acc?'Bắp đang rất tiến bộ! 🌟':'Lúc lên lúc xuống là bình thường, cứ đều đặn mỗi ngày nhé 💪'}</p>`;
 }
 
 /* ---------- Admin ---------- */
