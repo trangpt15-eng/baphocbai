@@ -42,22 +42,25 @@ nav button.on,.btn.main{background:var(--pink);color:#5b2a46;font-weight:700;box
 .bar i{display:block;height:100%;background:#8fd9b6;border-radius:99px;transition:width .4s}
 .lesson{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px;border-radius:16px;background:#fff7fa;margin:7px 0}
 .lesson.done{background:#e3f6ec;border:2px solid #8fd9b6}
+.lesson.folder{cursor:pointer;background:#fff1b8}
+.lesson.folder.done{background:#e3f6ec}
+.fh{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:14px 0 4px}
 .lesson small{display:block;color:var(--soft);margin-top:2px}
 .hide{display:none!important}
 input[type=text],input[type=number],textarea,select{font:inherit;width:100%;padding:9px 12px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);margin:4px 0 10px}
 label{font-size:.9rem;color:var(--soft)}
 /* typing */
-#stage{position:relative;border-radius:28px;padding:22px;min-height:430px;background:var(--lemon) center/cover no-repeat;overflow:hidden;border:3px solid #fff}
+#stage{position:relative;border-radius:28px;padding:22px;min-height:430px;background:var(--lemon) center/cover no-repeat;overflow:hidden;overflow:clip;border:3px solid #fff}
 #stage .veil{position:absolute;inset:0;background:rgba(255,255,255,.4);pointer-events:none}
 #stage>*{position:relative}
 .top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .clock{font-size:2rem;font-weight:700;background:rgba(255,255,255,.8);border-radius:18px;padding:2px 16px}
-#text{font-size:1.7rem;line-height:2.2;margin:18px 0;word-break:break-word;background:rgba(255,255,255,.4);border-radius:18px;padding:10px 14px}
+#text{font-size:1.7rem;line-height:2.2;margin:18px 0;white-space:normal;overflow-wrap:anywhere;word-break:normal;max-width:100%;background:rgba(255,255,255,.4);border-radius:18px;padding:10px 14px}
 #text span{opacity:.28;transition:opacity .15s}
 #text span.ok{opacity:1;font-weight:700}
 #text span.bad{opacity:1;font-weight:700;background:var(--badbg);color:var(--bad);border-radius:6px}
 #text span.cur{border-bottom:3px solid #f78fb3;opacity:.7}
-#inp{position:absolute;opacity:0;pointer-events:none;height:1px}
+#inp{position:fixed;left:0;top:0;width:1px;height:1px;margin:0;padding:0;border:0;opacity:0;pointer-events:none}
 .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
 .res div{background:#fff7fa;border-radius:18px;padding:12px;text-align:center}
 .res b{display:block;font-size:1.8rem}
@@ -105,7 +108,7 @@ label{font-size:.9rem;color:var(--soft)}
       <div class="card"><img class="ic" data-img="strawberry" alt=""><b>Mục tiêu hôm nay: <span id="goaltxt">15</span> phút</b>
         <div class="bar" style="margin-top:8px"><i id="tbar" style="width:0"></i></div>
         <small id="tmin" class="sub"></small></div>
-      <div class="card"><img class="ic" data-img="candy" alt=""><b>Chọn bài để luyện typing</b><div id="lessons"></div></div>
+      <div class="card"><img class="ic" data-img="candy" alt=""><b>Chọn câu chuyện để luyện typing</b><div id="lessons"></div></div>
     </div>
     <div id="play" class="hide">
       <div id="stage"><div class="veil"></div>
@@ -138,10 +141,12 @@ label{font-size:.9rem;color:var(--soft)}
         <button class="btn main sm" id="addtask">+ Thêm việc</button></div>
       <div class="card"><img class="ic" data-img="icecream" alt=""><b>Bài luyện typing</b><div id="alessons"></div></div>
       <div class="card"><b id="ftitle">Thêm bài mới</b>
-        <label>Tên bài</label><input type="text" id="lt">
+        <label>Thuộc câu chuyện (thư mục) — gõ tên mới để tạo thư mục</label><input type="text" id="ls" list="stories" placeholder="vd: Cô bé quàng khăn đỏ"><datalist id="stories"></datalist>
+        <label>Tên phần</label><input type="text" id="lt" placeholder="vd: Phần 1">
         <label>Nội dung để con luyện typing</label><textarea id="lx" rows="4"></textarea>
         <label>Link hình nền (URL ảnh, có thể bỏ trống)</label><input type="text" id="lb">
         <label>Link nhạc (URL file mp3, có thể bỏ trống)</label><input type="text" id="lm">
+        <label style="display:block;margin-bottom:8px"><input type="checkbox" id="lsplit" style="width:auto;margin-right:6px">Tách thành nhiều phần: mỗi đoạn cách nhau bằng 1 dòng trống sẽ là 1 phần (tên phần = Tên phần + số)</label>
         <button class="btn main" id="savel">Lưu bài</button> <button class="btn sm" id="clearl">Làm mới</button></div>
       <div class="card"><b>Cài đặt</b><br>
         <label>Tên hiển thị</label><input type="text" id="sname">
@@ -231,24 +236,39 @@ function renderDay(){
   $('pct').textContent=future?'Chưa đến ngày này':p===100?'Hoàn thành hết rồi, giỏi quá! 🌟':`Xong ${p}%`;
 }
 
-/* ---------- Luyện Typing ---------- */
+/* ---------- Luyện gõ ---------- */
 function bestOf(l){
   const rs=S.results.filter(r=>r.lessonId===l.id||(!r.lessonId&&r.lesson===l.title));
   if(!rs.length)return null;
   return{n:rs.length,best:rs.reduce((a,r)=>(r.wpm>a.wpm||(r.wpm===a.wpm&&r.acc>a.acc))?r:a)};
 }
+const storyOf=l=>l.story||'Bài lẻ';
+function storyMap(){const m=new Map();S.lessons.forEach(l=>{const k=storyOf(l);if(!m.has(k))m.set(k,[]);m.get(k).push(l)});return m}
+let openStory=null;
 function renderPick(){
   $('result').classList.add('hide');$('pick').classList.remove('hide');$('play').classList.add('hide');
   const g=goalFor(TODAY),m=typedSecs(TODAY)/60;
   $('goaltxt').textContent=g;$('tbar').style.width=Math.min(100,m/g*100)+'%';
   $('tmin').textContent=`Đã luyện ${m.toFixed(1)} / ${g} phút`;
-  $('lessons').innerHTML=S.lessons.length?S.lessons.map(l=>{const p=bestOf(l);
-    return `<div class="lesson ${p?'done':''}"><span>${p?'✅':'📖'} ${esc(l.title)}${p?`<small>Cao nhất: <b>${p.best.wpm}</b> từ/phút · <b>${p.best.acc}%</b> chính xác · đã luyện ${p.n} lần</small>`:''}</span><button class="btn ${p?'':'main'} sm" data-play="${l.id}">${p?'typing lại':'Bắt đầu'}</button></div>`}).join(''):'Chưa có bài nào. Nhờ ba mẹ thêm bài nhé!';
-  $('lessons').querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>startLesson(b.dataset.play));
+  const map=storyMap();
+  if(openStory!==null&&!map.has(openStory))openStory=null;
+  const box=$('lessons');
+  if(!map.size){box.innerHTML='Chưa có bài nào. Nhờ ba mẹ thêm bài nhé!';return}
+  if(openStory===null){
+    box.innerHTML=[...map].map(([k,ls])=>{const dn=ls.filter(x=>bestOf(x)).length;
+      return `<div class="lesson folder ${dn===ls.length?'done':''}" data-open="${esc(k)}"><span>📁 ${esc(k)}<small>${dn}/${ls.length} phần đã luyện</small></span><button class="btn main sm">Mở</button></div>`}).join('');
+    box.querySelectorAll('[data-open]').forEach(el=>el.onclick=()=>{openStory=el.dataset.open;renderPick()});
+  }else{
+    const ls=map.get(openStory);
+    box.innerHTML=`<div class="fh"><button class="btn sm" id="bk">← Các câu chuyện</button><b>📁 ${esc(openStory)}</b></div>`+ls.map(l=>{const p=bestOf(l);
+      return `<div class="lesson ${p?'done':''}"><span>${p?'✅':'📖'} ${esc(l.title)}${p?`<small>Cao nhất: <b>${p.best.wpm}</b> từ/phút · <b>${p.best.acc}%</b> chính xác · đã luyện ${p.n} lần</small>`:''}</span><button class="btn ${p?'':'main'} sm" data-play="${l.id}">${p?'typing lại':'Bắt đầu'}</button></div>`}).join('');
+    $('bk').onclick=()=>{openStory=null;renderPick()};
+    box.querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>startLesson(b.dataset.play));
+  }
 }
 let L,txt,started,t0,tick,errs,keys,secs,finished,prev='';
 function startLesson(id){
-  L=S.lessons.find(x=>x.id===id);if(!L)return;
+  L=S.lessons.find(x=>x.id===id);if(!L)return;openStory=storyOf(L);
   txt=L.text.replace(/\s+/g,' ').trim();
   $('pick').classList.add('hide');$('result').classList.add('hide');$('play').classList.remove('hide');
   const bgv=(L.bg==='bg'||L.bg==='img/bg.jpg')?IMG.bg:L.bg;$('stage').style.backgroundImage=bgv?`url("${bgv.replace(/"/g,'')}")`:'none';
@@ -256,7 +276,7 @@ function startLesson(id){
   $('inp').value='';prev='';started=false;errs=0;keys=0;secs=0;finished=false;$('clock').textContent='00:00';
   clearInterval(tick);
   const a=$('aud');if(L.music){a.src=L.music;a.volume=.5;a.play().catch(()=>{})}else{a.removeAttribute('src')}
-  paint([]);$('inp').focus();
+  paint([]);$('inp').focus({preventScroll:true});
 }
 const fmt=s=>String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
 function paint(v){const sp=$('text').children,c=[...txt];
@@ -269,7 +289,8 @@ $('inp').addEventListener('input',()=>{
   prev=v.join('');paint(v);
   if(v.length>=c.length)finish();
 });
-$('stage').onclick=()=>$('inp').focus();
+$('stage').addEventListener('scroll',()=>{$('stage').scrollLeft=0;$('stage').scrollTop=0});
+$('stage').onclick=()=>$('inp').focus({preventScroll:true});
 $('stop').onclick=()=>{if(started)finish();else{leavePlay();renderPick()}};
 $('back').onclick=()=>{leavePlay();renderPick()};
 function leavePlay(){clearInterval(tick);$('aud').pause();prev=''}
@@ -277,13 +298,14 @@ function finish(){
   if(finished)return;finished=true;clearInterval(tick);$('aud').pause();
   secs=Math.max(1,Math.round((Date.now()-t0)/1000));
   const typed=[...$('inp').value].length,wpm=Math.round((typed/5)/(secs/60)),acc=keys?Math.round((keys-errs)/keys*100):100;
-  const pb=bestOf(L),best=pb?pb.best.wpm:null;
+  const pb=bestOf(L),best=pb?pb.best.wpm:null;const sl=S.lessons.filter(x=>storyOf(x)===storyOf(L));const nxt=sl[sl.findIndex(x=>x.id===L.id)+1];
   const rec={date:TODAY,lesson:L.title,lessonId:L.id,wpm,acc,secs,at:Date.now()};S.results.push(rec);saveResult(rec);prev='';
   $('play').classList.add('hide');$('result').classList.remove('hide');
   $('result').innerHTML=`<img class="stk" src="${IMG.star}" alt="" style="width:60px;right:12px;top:-18px"><h2 style="margin-top:0">Giỏi quá! 🎉</h2><div class="res">
    <div><b>${wpm}</b>từ/phút</div><div><b>${acc}%</b>chính xác</div><div><b>${fmt(secs)}</b>thời gian</div><div><b>${errs}</b>lần bấm sai</div></div>
    <p>${best===null?'Lần đầu Bắp làm bài này, cố lên nhé!':(wpm>best?'Nhanh hơn kỷ lục cũ rồi 🚀':'Bắp thử phá kỷ lục '+best+' từ/phút nhé!')}</p>
-   <button class="btn main" id="again">Luyện typing tiếp</button> <button class="btn" id="home">Về lịch tuần</button>`;
+   ${nxt?'<button class="btn main" id="nextp">Phần tiếp theo ➜</button> ':''}<button class="btn ${nxt?'':'main'}" id="again">Về danh sách phần</button> <button class="btn" id="home">Về lịch tuần</button>`;
+  if(nxt)$('nextp').onclick=()=>startLesson(nxt.id);
   $('again').onclick=renderPick;$('home').onclick=()=>view('home');
 }
 
@@ -305,7 +327,7 @@ function renderStats(){
   $('sbox').innerHTML=`<div class="res" style="margin-top:12px">
    <div><b>${cur.wpm}</b>từ/phút<br>${delta(cur.wpm,pre.wpm,'')} so với ${lbl}</div>
    <div><b>${cur.acc}%</b>chính xác<br>${delta(cur.acc,pre.acc,'%')}</div>
-   <div><b>${cur.mins}</b>phút đã <br>${delta(cur.mins,pre.mins,'')}</div>
+   <div><b>${cur.mins}</b>phút đã luyện<br>${delta(cur.mins,pre.mins,'')}</div>
    <div><b>${cur.done}%</b>hoàn thành việc<br>${delta(cur.done,pre.done,'%')}</div></div>
    <p style="margin-bottom:0"><small>Tốc độ typing trung bình mỗi ngày</small></p>
    <div class="cols">${dw.map((w,i)=>`<div title="${cur.days[i]}: ${w} từ/phút" style="height:${w/mx*100}%"></div>`).join('')}</div>
@@ -323,9 +345,13 @@ function renderAdmin(){
   const dd=+$('aday').value;
   $('atasks').innerHTML=(S.sched[dd]||[]).map(t=>`<div class="lesson"><span>${t.typing?'⌨️ ':''}${esc(t.text)}</span><button class="btn sm" data-dt="${t.id}">Xóa</button></div>`).join('')||'<p class="sub">Chưa có việc.</p>';
   $('atasks').querySelectorAll('[data-dt]').forEach(b=>b.onclick=()=>{S.sched[dd]=S.sched[dd].filter(t=>t.id!==b.dataset.dt);save('sched');renderAdmin()});
-  $('alessons').innerHTML=S.lessons.map(l=>`<div class="lesson"><span>${esc(l.title)}</span><span><button class="btn sm" data-el="${l.id}">Sửa</button> <button class="btn sm" data-dl="${l.id}">Xóa</button></span></div>`).join('');
+  const sm=storyMap();
+  $('stories').innerHTML=[...sm.keys()].map(k=>`<option value="${esc(k)}">`).join('');
+  $('alessons').innerHTML=[...sm].map(([k,ls])=>`<div class="fh"><b>📁 ${esc(k)}</b><button class="btn sm" data-rn="${esc(k)}">Đổi tên thư mục</button></div>`+ls.map(l=>`<div class="lesson"><span>${esc(l.title)}</span><span><button class="btn sm" data-el="${l.id}">Sửa</button> <button class="btn sm" data-dl="${l.id}">Xóa</button></span></div>`).join('')).join('')||'<p class="sub">Chưa có bài.</p>';
+  $('alessons').querySelectorAll('[data-rn]').forEach(b=>b.onclick=()=>{const old=b.dataset.rn,nn=(prompt('Tên mới cho thư mục:',old)||'').trim();if(!nn)return;
+    S.lessons.forEach(l=>{if(storyOf(l)===old)l.story=nn});if(openStory===old)openStory=nn;save('lessons');renderAdmin()});
   $('alessons').querySelectorAll('[data-el]').forEach(b=>b.onclick=()=>{const l=S.lessons.find(x=>x.id===b.dataset.el);editId=l.id;
-    $('lt').value=l.title;$('lx').value=l.text;$('lb').value=l.bg;$('lm').value=l.music;$('ftitle').textContent='Sửa bài: '+l.title;$('lt').scrollIntoView({behavior:'smooth'})});
+    $('ls').value=l.story||'';$('lt').value=l.title;$('lx').value=l.text;$('lb').value=l.bg;$('lm').value=l.music;$('ftitle').textContent='Sửa bài: '+l.title;$('lt').scrollIntoView({behavior:'smooth'})});
   $('alessons').querySelectorAll('[data-dl]').forEach(b=>b.onclick=()=>{if(confirm('Xóa bài này?')){S.lessons=S.lessons.filter(x=>x.id!==b.dataset.dl);save('lessons');renderAdmin()}});
   $('sname').value=S.name;$('spin').value='';
 }
@@ -335,12 +361,17 @@ $('addtask').onclick=()=>{
   days.forEach(d=>{(S.sched[d]=S.sched[d]||[]).push(mn?{id:uid(),text:v,typing:mn}:{id:uid(),text:v})});
   $('ntask').value='';$('nmin').value='';save('sched');renderAdmin();
 };
-function clearForm(){editId=null;['lt','lx','lb','lm'].forEach(i=>$(i).value='');$('ftitle').textContent='Thêm bài mới'}
+function clearForm(){editId=null;['ls','lt','lx','lb','lm'].forEach(i=>$(i).value='');$('lsplit').checked=false;$('ftitle').textContent='Thêm bài mới'}
 $('clearl').onclick=clearForm;
 $('savel').onclick=()=>{
-  const o={title:$('lt').value.trim(),text:$('lx').value.trim(),bg:$('lb').value.trim(),music:$('lm').value.trim()};
-  if(!o.title||!o.text){alert('Cần có tên bài và nội dung');return}
-  if(editId)Object.assign(S.lessons.find(x=>x.id===editId),o);else S.lessons.push({id:uid(),...o});
+  const base={story:$('ls').value.trim(),bg:$('lb').value.trim(),music:$('lm').value.trim()};
+  const title=$('lt').value.trim(),text=$('lx').value.trim();
+  if(!title||!text){alert('Cần có tên phần và nội dung');return}
+  if(editId){Object.assign(S.lessons.find(x=>x.id===editId),{...base,title,text})}
+  else if($('lsplit').checked){
+    const ps=text.split(/\n\s*\n/).map(x=>x.trim()).filter(Boolean);
+    ps.forEach((p,i)=>S.lessons.push({id:uid(),...base,title:ps.length>1?`${title} ${i+1}`:title,text:p}));
+  }else S.lessons.push({id:uid(),...base,title,text});
   save('lessons');clearForm();renderAdmin();
 };
 $('ssave').onclick=()=>{S.name=$('sname').value.trim()||DEF.name;if($('spin').value.trim())S.pin=$('spin').value.trim();save('name','pin');renderAdmin();alert('Đã lưu')};
