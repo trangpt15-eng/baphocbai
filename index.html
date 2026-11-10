@@ -45,8 +45,10 @@ nav button.on,.btn.main{background:var(--pink);color:#5b2a46;font-weight:700;box
 .ph{position:relative}
 .ph img{width:64px;height:64px;object-fit:cover;border-radius:12px;border:2px solid #fff;cursor:zoom-in;display:block}
 .ph b{position:absolute;top:-6px;right:-6px;background:#fff;border-radius:50%;width:20px;height:20px;text-align:center;line-height:20px;font-size:.8rem;cursor:pointer;box-shadow:0 1px 0 var(--line)}
-#lbx{position:fixed;inset:0;background:rgba(60,30,50,.8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:50}
-#lbx img{max-width:92vw;max-height:80vh;border-radius:16px}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#fff;padding:10px 18px;border-radius:999px;box-shadow:0 3px 0 var(--line),0 6px 18px rgba(0,0,0,.15);z-index:60;max-width:90vw;text-align:center}
+.ph.pend img{border:2px dashed var(--pink2);opacity:.85}
+#lbx{position:fixed;inset:0;background:rgba(60,30,50,.8);display:flex;align-items:center;justify-content:center;z-index:50}
+#lbx img{max-width:92vw;max-height:90vh;border-radius:16px}
 .task small{display:block;color:var(--soft)}
 .bar{height:14px;background:var(--line);border-radius:99px;overflow:hidden}
 .bar i{display:block;height:100%;background:#8fd9b6;border-radius:99px;transition:width .4s}
@@ -93,6 +95,7 @@ label{font-size:.9rem;color:var(--soft)}
 </style>
 </head>
 <body>
+<div id="lbx" class="hide"><img alt=""></div><div id="toast" class="hide"></div>
 <img class="stk deco1" data-img="bear" alt="">
 <img class="stk deco2" data-img="cloud" alt="">
 <div class="wrap">
@@ -140,10 +143,6 @@ label{font-size:.9rem;color:var(--soft)}
       <audio id="aud" loop></audio>
     </div>
     <div id="result" class="card hide"></div>
-    <div id="lbx" class="hide">
-  <img id="lbx-img" alt="">
-  <a id="lbx-dl" class="btn sm main" download="bai_lam.jpg">💾 Lưu ảnh về máy</a>
-</div>
   </section>
 
   <section id="v-stats" class="hide">
@@ -163,9 +162,6 @@ label{font-size:.9rem;color:var(--soft)}
         <label>Link làm bài (không bắt buộc) — con bấm vào việc sẽ mở link này</label><input type="text" id="ntlink" placeholder="vd: https://www.ioe.vn">
         <label>Nhập số phút luyện typing</label><input type="number" id="nmin" min="1">
         <label>Áp dụng cho</label><select id="ato"></select>
-        <div id="date-pick-wrap" class="hide">
-  <label>Chọn ngày</label><input type="date" id="aspecificdate">
-</div>
         <button class="btn main sm" id="addtask">+ Thêm việc</button></div>
       <div class="card"><img class="ic" data-img="candy" alt=""><b>Thư mục câu chuyện</b>
         <div id="afolders"></div>
@@ -174,7 +170,6 @@ label{font-size:.9rem;color:var(--soft)}
         <button class="btn main sm" id="addfolder">+ Thêm thư mục</button>
         <input type="file" id="fimg2" accept="image/*" hidden></div>
       <div class="card"><img class="ic" data-img="icecream" alt=""><b>Bài luyện typing</b><div id="alessons"></div></div>
-      <div class="card"><img class="ic" data-img="sunflower" alt=""><b>Lịch sử luyện typing (Xóa tiến trình / kết quả)</b><div id="aresults"></div></div>
       <div class="card"><b id="ftitle">Thêm bài mới</b>
         <label>Thuộc thư mục</label><select id="ls"></select>
         <label>Tên phần</label><input type="text" id="lt" placeholder="vd: Phần 1">
@@ -183,6 +178,9 @@ label{font-size:.9rem;color:var(--soft)}
         <label>Link nhạc (URL file mp3, có thể bỏ trống)</label><input type="text" id="lm">
         <label style="display:block;margin-bottom:8px"><input type="checkbox" id="lsplit" style="width:auto;margin-right:6px">Tách thành nhiều phần: mỗi đoạn cách nhau bằng 1 dòng trống sẽ là 1 phần (tên phần = Tên phần + số)</label>
         <button class="btn main" id="savel">Lưu bài</button> <button class="btn sm" id="clearl">Làm mới</button></div>
+      <div class="card"><img class="ic" data-img="cloud" alt=""><b>Kết quả luyện typing</b>
+        <small class="sub" style="display:block;margin:4px 0">Xóa lần luyện nhầm để không tính vào tốc độ, độ chính xác và số phút.</small>
+        <div id="ares"></div></div>
       <div class="card"><b>Cài đặt</b><br>
         <label>Tên hiển thị</label><input type="text" id="sname">
         <label>Đổi mật khẩu</label><input type="text" id="spin">
@@ -279,14 +277,20 @@ function shrink(file,max,q,cb){
     im.onerror=()=>alert('Không đọc được ảnh này, con thử ảnh khác nhé');im.src=r.result};
   r.readAsDataURL(file);
 }
-function addPhoto(taskId,file){
-  shrink(file,1000,.65,data=>{
-    const id=`${sel}_${taskId}_${Date.now()}`,o={date:sel,taskId,data,at:Date.now()};
-    if(window.cloud)window.cloud.addPhoto(id,o).catch(cloudErr);
-    else{const all=localPhotos();all.push({id,...o});
-      try{localStorage.setItem(LP_KEY,JSON.stringify(all))}catch(e){alert('Bộ nhớ máy đã đầy');return}
-      PH_DATA=all.filter(p=>p.date===sel);renderDay()}
-  });
+let PEND={},toastT=null;
+function toast(m){const t=$('toast');t.textContent=m;t.classList.remove('hide');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.add('hide'),2800)}
+function addPending(taskId,file){shrink(file,1000,.65,data=>{const k=sel+'|'+taskId;(PEND[k]=PEND[k]||[]).push(data);renderDay()})}
+function savePending(taskId,btn){
+  const k=sel+'|'+taskId,list=PEND[k]||[],day=sel;if(!list.length)return;
+  btn.disabled=true;btn.textContent='⏳ Đang lưu…';
+  let jobs;
+  try{
+    jobs=list.map((data,i)=>{const id=`${day}_${taskId}_${Date.now()}_${i}`,o={date:day,taskId,data,at:Date.now()+i};
+      if(window.cloud)return window.cloud.addPhoto(id,o);
+      const all=localPhotos();all.push({id,...o});localStorage.setItem(LP_KEY,JSON.stringify(all));return Promise.resolve()});
+  }catch(e){toast('⚠️ Bộ nhớ máy đã đầy');renderDay();return}
+  Promise.all(jobs).then(()=>{delete PEND[k];if(!window.cloud)PH_DATA=localPhotos().filter(p=>p.date===sel);toast(`✅ Đã lưu ${list.length} ảnh bài làm`);renderDay()})
+    .catch(e=>{cloudErr(e);toast('⚠️ Chưa lưu được, con thử lại nhé');renderDay()});
 }
 function delPhoto(id){
   if(!confirm('Xóa ảnh này?'))return;
@@ -299,27 +303,24 @@ function renderDay(){
   $('dtitle').textContent=`${DFULL[d.getDay()]}, ${d.getDate()}/${d.getMonth()+1}${sel===TODAY?' (hôm nay)':''}`;
   $('list').innerHTML=ts.map(t=>{const on=isDone(sel,t);
     const link=t.link?`<a class="tbtn" href="${esc(t.link)}" target="_blank" rel="noopener">🔗 Mở bài làm</a>`:'';
-    const up=t.typing?'':`<label class="tbtn ${future?'off':''}">📷 Chụp / tải ảnh bài làm<input type="file" accept="image/*" data-up="${t.id}" hidden></label>`;
-    const ph=t.typing?'':PH_DATA.filter(p=>p.taskId===t.id).map(p=>`<span class="ph"><img src="${p.data}" data-big="${p.id}" alt=""><b data-delph="${p.id}">×</b></span>`).join('');
+    const up=t.typing?'':`<label class="tbtn ${future?'off':''}">📷 Chụp / chọn ảnh bài làm<input type="file" accept="image/*" multiple data-up="${t.id}" hidden></label>`;
+    const saved=t.typing?[]:PH_DATA.filter(p=>p.taskId===t.id),pend=t.typing?[]:(PEND[sel+'|'+t.id]||[]);
+    const thumbs=saved.map(p=>`<span class="ph"><img src="${p.data}" data-big="${p.id}" alt=""><b data-delph="${p.id}">×</b></span>`).join('')+pend.map((s,i)=>`<span class="ph pend"><img src="${s}" data-big="p" alt=""><b data-rm="${t.id}|${i}">×</b></span>`).join('');
     const acts=(link||up)?`<div class="tact">${link}${up}</div>`:'';
-    const phs=ph?`<div class="phs">${ph}</div>`:'';
+    const phs=thumbs?`<div class="phs">${thumbs}</div>`:'';
+    const note=pend.length?`<div class="tact"><button class="btn main sm" data-savep="${t.id}">💾 Lưu ${pend.length} ảnh</button><small>⏳ Chưa lưu — bấm Lưu để nộp bài</small></div>`:(saved.length?`<div class="tact"><small>✅ Đã lưu ${saved.length} ảnh · bấm vào ảnh để xem to</small></div>`:'');
     return t.typing
      ?`<div class="task ${on?'done':''}"><div class="trow" data-go="1"><input type="checkbox" ${on?'checked':''} onclick="return false"><span>⌨️ ${esc(t.text)}<small>Đã luyện ${(typedSecs(sel)/60).toFixed(1)}/${t.typing} phút — bấm để vào luyện</small></span></div>${acts}</div>`
-     :`<div class="task ${on?'done':''}"><label class="trow"><input type="checkbox" data-id="${t.id}" ${on?'checked':''} ${future?'disabled':''}><span>${esc(t.text)}</span></label>${acts}${phs}</div>`}).join('')||'<p class="sub">Ngày này chưa có việc nào.</p>';
+     :`<div class="task ${on?'done':''}"><label class="trow"><input type="checkbox" data-id="${t.id}" ${on?'checked':''} ${future?'disabled':''}><span>${esc(t.text)}</span></label>${acts}${phs}${note}</div>`}).join('')||'<p class="sub">Ngày này chưa có việc nào.</p>';
   const L=$('list');
   L.querySelectorAll('input[data-id]').forEach(i=>i.onchange=()=>{
     S.checks[sel]=S.checks[sel]||{};S.checks[sel][i.dataset.id]=i.checked;saveCheck(sel,i.dataset.id,i.checked);renderHome()});
   L.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>view('type'));
-  L.querySelectorAll('[data-up]').forEach(i=>i.onchange=()=>{const f=i.files[0];i.value='';if(f)addPhoto(i.dataset.up,f)});
-L.querySelectorAll('[data-big]').forEach(i=>i.onclick=()=>{
-  $('lbx-img').src=i.src;
-  $('lbx-dl').href=i.src;
-  $('lbx').classList.remove('hide');
-});
-
-$('lbx').onclick=e=>{
-  if(e.target.id!=='lbx-dl') $('lbx').classList.add('hide');
-};  L.querySelectorAll('[data-delph]').forEach(i=>i.onclick=()=>delPhoto(i.dataset.delph));
+  L.querySelectorAll('[data-up]').forEach(i=>i.onchange=()=>{[...i.files].forEach(f=>addPending(i.dataset.up,f));i.value=''});
+  L.querySelectorAll('[data-savep]').forEach(b=>b.onclick=()=>savePending(b.dataset.savep,b));
+  L.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{const[id,i]=b.dataset.rm.split('|'),k=sel+'|'+id;PEND[k].splice(+i,1);if(!PEND[k].length)delete PEND[k];renderDay()});
+  L.querySelectorAll('[data-big]').forEach(i=>i.onclick=()=>{$('lbx').querySelector('img').src=i.src;$('lbx').classList.remove('hide')});
+  L.querySelectorAll('[data-delph]').forEach(i=>i.onclick=()=>delPhoto(i.dataset.delph));
   const p=dayPct(sel);$('pbar').style.width=p+'%';
   $('pct').textContent=future?'Chưa đến ngày này':p===100?'Hoàn thành hết rồi, giỏi quá! 🌟':`Xong ${p}%`;
 }
@@ -414,9 +415,10 @@ function finish(){
   $('result').innerHTML=`<img class="stk" src="${IMG.star}" alt="" style="width:60px;right:12px;top:-18px"><h2 style="margin-top:0">Giỏi quá! 🎉</h2><div class="res">
    <div><b>${wpm}</b>từ/phút</div><div><b>${acc}%</b>chính xác</div><div><b>${fmt(secs)}</b>thời gian</div><div><b>${errs}</b>lần bấm sai</div></div>
    <p>${best===null?'Lần đầu Bắp làm bài này, cố lên nhé!':(wpm>best?'Nhanh hơn kỷ lục cũ rồi 🚀':'Bắp thử phá kỷ lục '+best+' từ/phút nhé!')}</p>
-   ${nxt?'<button class="btn main" id="nextp">Phần tiếp theo ➜</button> ':''}<button class="btn ${nxt?'':'main'}" id="again">Về danh sách phần</button> <button class="btn" id="home">Về lịch tuần</button>`;
+   ${nxt?'<button class="btn main" id="nextp">Phần tiếp theo ➜</button> ':''}<button class="btn ${nxt?'':'main'}" id="again">Về danh sách phần</button> <button class="btn" id="home">Về lịch tuần</button> <button class="btn sm" id="undo">🗑 Không lưu lần này</button>`;
   if(nxt)$('nextp').onclick=()=>startLesson(nxt.id);
   $('again').onclick=renderPick;$('home').onclick=()=>view('home');
+  $('undo').onclick=()=>{S.results=S.results.filter(r=>r.at!==rec.at);save('results');toast('Đã bỏ kết quả lần này');renderPick()};
 }
 
 /* ---------- Thống kê ---------- */
@@ -446,8 +448,7 @@ function renderStats(){
 
 /* ---------- Admin ---------- */
 $('aday').innerHTML=[1,2,3,4,5,6,0].map(i=>`<option value="${i}">${DFULL[i]}</option>`).join('');
-$('ato').innerHTML='<option value="sel">Chỉ ngày đang chọn ở trên</option><option value="wd">Tất cả $('ato').innerHTML='<option value="sel">Chỉ ngày đang chọn ở trên</option><option value="specific">Chọn ngày</option><option value="wd">Tất cả T2–T6</option><option value="all">Cả tuần</option>';
-$('ato').onchange=()=>{$('date-pick-wrap').classList.toggle('hide', $('ato').value!=='specific')};–T6</option><option value="all">Cả tuần</option>';
+$('ato').innerHTML='<option value="sel">Chỉ ngày đang chọn ở trên</option><option value="wd">Tất cả T2–T6</option><option value="all">Cả tuần</option>';
 $('aday').onchange=renderAdmin;
 $('unlock').onclick=()=>{if($('pin').value===S.pin){$('lock').classList.add('hide');$('panel').classList.remove('hide');renderAdmin()}else alert('Sai mã PIN')};
 $('lockbtn').onclick=()=>{$('panel').classList.add('hide');$('lock').classList.remove('hide');$('pin').value=''};
@@ -461,45 +462,30 @@ function renderAdmin(){
   $('atasks').querySelectorAll('[data-dt]').forEach(b=>b.onclick=()=>{S.sched[dd]=S.sched[dd].filter(t=>t.id!==b.dataset.dt);save('sched');renderAdmin()});
   renderFolderAdmin();
   const sm=storyMap();
-  $('alessons').innerHTML=[...sm].map(([k,ls])=>`<div class="fh"><b>📁 ${esc(k)}</b></div>`+ls.map(l=>`<div class="lesson"><span>${esc(l.title)}</span><span><button class="btn sm" data-el="${l.id}">Sửa</button> <button class="btn sm" data-dl="${l.id}">Xóa</button></span></div>`).join('')).join('')||'<p class="sub">Chưa có bài.</p>';
+  $('alessons').innerHTML=[...sm].map(([k,ls])=>`<div class="fh"><b>📁 ${esc(k)}</b></div>`+ls.map(l=>`<div class="lesson"><span>${esc(l.title)}</span><span>${S.results.some(r=>hasRes(r,l))?`<button class="btn sm" data-rl="${l.id}">Xóa kết quả</button> `:''}<button class="btn sm" data-el="${l.id}">Sửa</button> <button class="btn sm" data-dl="${l.id}">Xóa</button></span></div>`).join('')).join('')||'<p class="sub">Chưa có bài.</p>';
+  renderResultsAdmin();
   $('alessons').querySelectorAll('[data-el]').forEach(b=>b.onclick=()=>{const l=S.lessons.find(x=>x.id===b.dataset.el);editId=l.id;
     $('ls').value=l.story||'';$('lt').value=l.title;$('lx').value=l.text;$('lb').value=l.bg;$('lm').value=l.music;$('ftitle').textContent='Sửa bài: '+l.title;$('lt').scrollIntoView({behavior:'smooth'})});
   $('alessons').querySelectorAll('[data-dl]').forEach(b=>b.onclick=()=>{if(confirm('Xóa bài này?')){S.lessons=S.lessons.filter(x=>x.id!==b.dataset.dl);save('lessons');renderAdmin()}});
-  const recent = (S.results||[]).slice(-15).reverse();
-  $('aresults').innerHTML = recent.length ? recent.map(r=>`
-    <div class="lesson">
-      <span><b>${esc(r.lesson)}</b> (${r.date})<small>⚡ ${r.wpm} wpm · 🎯 ${r.acc}% chính xác</small></span>
-      <button class="btn sm" data-delres="${r.at}">Xóa</button>
-    </div>
-  `).join('') : '<p class="sub">Chưa có kết quả nào.</p>';
-
-  $('aresults').querySelectorAll('[data-delres]').forEach(b=>b.onclick=()=>{
-    const at = +b.dataset.delres;
-    if(confirm('Xóa kết quả lần làm bài này?')){
-      S.results = S.results.filter(r=>r.at!==at);
-      save('results');
-      renderAdmin();
-      renderPick();
-    }
-  });
   $('sname').value=S.name;$('spin').value='';
 }
 $('addtask').onclick=()=>{
   const v=$('ntask').value.trim();if(!v)return;const mn=+$('nmin').value||0,to=$('ato').value;
+  const days=to==='all'?[0,1,2,3,4,5,6]:to==='wd'?[1,2,3,4,5]:[+$('aday').value];
   const lk=normLink($('ntlink').value);
-  if(to==='specific'){
-    const dt=$('aspecificdate').value;
-    if(!dt){alert('Vui lòng chọn ngày cụ thể');return}
-    const d=parse(dt).getDay();
-    const it=mn?{id:uid(),text:v,typing:mn}:{id:uid(),text:v};
-    if(lk&&!mn)it.link=lk;
-    (S.sched[d]=S.sched[d]||[]).push(it);
-  }else{
-    const days=to==='all'?[0,1,2,3,4,5,6]:to==='wd'?[1,2,3,4,5]:[+$('aday').value];
-    days.forEach(d=>{const it=mn?{id:uid(),text:v,typing:mn}:{id:uid(),text:v};if(lk&&!mn)it.link=lk;(S.sched[d]=S.sched[d]||[]).push(it)});
-  }
+  days.forEach(d=>{const it=mn?{id:uid(),text:v,typing:mn}:{id:uid(),text:v};if(lk&&!mn)it.link=lk;(S.sched[d]=S.sched[d]||[]).push(it)});
   $('ntlink').value='';$('ntask').value='';$('nmin').value='';save('sched');renderAdmin();
 };
+const hasRes=(r,l)=>r.lessonId===l.id||(!r.lessonId&&r.lesson===l.title);
+function renderResultsAdmin(){
+  const rs=S.results.slice().sort((a,b)=>b.at-a.at).slice(0,40);
+  $('ares').innerHTML=rs.map(r=>`<div class="lesson"><span>${esc(r.lesson)}<small>${r.date} · ⚡ ${r.wpm} từ/phút · 🎯 ${r.acc}% · ${fmt(r.secs)}</small></span><button class="btn sm" data-rr="${r.at}">Xóa</button></div>`).join('')||'<p class="sub">Chưa có kết quả nào.</p>';
+  $('ares').querySelectorAll('[data-rr]').forEach(b=>b.onclick=()=>{
+    if(!confirm('Xóa kết quả này?'))return;S.results=S.results.filter(r=>String(r.at)!==b.dataset.rr);save('results');renderAdmin()});
+  $('alessons').querySelectorAll('[data-rl]').forEach(b=>b.onclick=()=>{
+    const l=S.lessons.find(x=>x.id===b.dataset.rl);if(!l||!confirm(`Xóa TẤT CẢ kết quả của "${l.title}"? (tốc độ, độ chính xác, số phút luyện)`))return;
+    S.results=S.results.filter(r=>!hasRes(r,l));save('results');renderAdmin()});
+}
 function readThumb(file,cb){
   const r=new FileReader();
   r.onload=()=>{const im=new Image();
