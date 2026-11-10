@@ -45,8 +45,8 @@ nav button.on,.btn.main{background:var(--pink);color:#5b2a46;font-weight:700;box
 .ph{position:relative}
 .ph img{width:64px;height:64px;object-fit:cover;border-radius:12px;border:2px solid #fff;cursor:zoom-in;display:block}
 .ph b{position:absolute;top:-6px;right:-6px;background:#fff;border-radius:50%;width:20px;height:20px;text-align:center;line-height:20px;font-size:.8rem;cursor:pointer;box-shadow:0 1px 0 var(--line)}
-#lbx{position:fixed;inset:0;background:rgba(60,30,50,.8);display:flex;align-items:center;justify-content:center;z-index:50}
-#lbx img{max-width:92vw;max-height:90vh;border-radius:16px}
+#lbx{position:fixed;inset:0;background:rgba(60,30,50,.8);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:50}
+#lbx img{max-width:92vw;max-height:80vh;border-radius:16px}
 .task small{display:block;color:var(--soft)}
 .bar{height:14px;background:var(--line);border-radius:99px;overflow:hidden}
 .bar i{display:block;height:100%;background:#8fd9b6;border-radius:99px;transition:width .4s}
@@ -140,7 +140,10 @@ label{font-size:.9rem;color:var(--soft)}
       <audio id="aud" loop></audio>
     </div>
     <div id="result" class="card hide"></div>
-    <div id="lbx" class="hide"><img alt=""></div>
+    <div id="lbx" class="hide">
+  <img id="lbx-img" alt="">
+  <a id="lbx-dl" class="btn sm main" download="bai_lam.jpg">💾 Lưu ảnh về máy</a>
+</div>
   </section>
 
   <section id="v-stats" class="hide">
@@ -160,6 +163,9 @@ label{font-size:.9rem;color:var(--soft)}
         <label>Link làm bài (không bắt buộc) — con bấm vào việc sẽ mở link này</label><input type="text" id="ntlink" placeholder="vd: https://www.ioe.vn">
         <label>Nhập số phút luyện typing</label><input type="number" id="nmin" min="1">
         <label>Áp dụng cho</label><select id="ato"></select>
+        <div id="date-pick-wrap" class="hide">
+  <label>Chọn ngày</label><input type="date" id="aspecificdate">
+</div>
         <button class="btn main sm" id="addtask">+ Thêm việc</button></div>
       <div class="card"><img class="ic" data-img="candy" alt=""><b>Thư mục câu chuyện</b>
         <div id="afolders"></div>
@@ -168,6 +174,7 @@ label{font-size:.9rem;color:var(--soft)}
         <button class="btn main sm" id="addfolder">+ Thêm thư mục</button>
         <input type="file" id="fimg2" accept="image/*" hidden></div>
       <div class="card"><img class="ic" data-img="icecream" alt=""><b>Bài luyện typing</b><div id="alessons"></div></div>
+      <div class="card"><img class="ic" data-img="sunflower" alt=""><b>Lịch sử luyện typing (Xóa tiến trình / kết quả)</b><div id="aresults"></div></div>
       <div class="card"><b id="ftitle">Thêm bài mới</b>
         <label>Thuộc thư mục</label><select id="ls"></select>
         <label>Tên phần</label><input type="text" id="lt" placeholder="vd: Phần 1">
@@ -304,8 +311,15 @@ function renderDay(){
     S.checks[sel]=S.checks[sel]||{};S.checks[sel][i.dataset.id]=i.checked;saveCheck(sel,i.dataset.id,i.checked);renderHome()});
   L.querySelectorAll('[data-go]').forEach(x=>x.onclick=()=>view('type'));
   L.querySelectorAll('[data-up]').forEach(i=>i.onchange=()=>{const f=i.files[0];i.value='';if(f)addPhoto(i.dataset.up,f)});
-  L.querySelectorAll('[data-big]').forEach(i=>i.onclick=()=>{$('lbx').querySelector('img').src=i.src;$('lbx').classList.remove('hide')});
-  L.querySelectorAll('[data-delph]').forEach(i=>i.onclick=()=>delPhoto(i.dataset.delph));
+L.querySelectorAll('[data-big]').forEach(i=>i.onclick=()=>{
+  $('lbx-img').src=i.src;
+  $('lbx-dl').href=i.src;
+  $('lbx').classList.remove('hide');
+});
+
+$('lbx').onclick=e=>{
+  if(e.target.id!=='lbx-dl') $('lbx').classList.add('hide');
+};  L.querySelectorAll('[data-delph]').forEach(i=>i.onclick=()=>delPhoto(i.dataset.delph));
   const p=dayPct(sel);$('pbar').style.width=p+'%';
   $('pct').textContent=future?'Chưa đến ngày này':p===100?'Hoàn thành hết rồi, giỏi quá! 🌟':`Xong ${p}%`;
 }
@@ -432,7 +446,8 @@ function renderStats(){
 
 /* ---------- Admin ---------- */
 $('aday').innerHTML=[1,2,3,4,5,6,0].map(i=>`<option value="${i}">${DFULL[i]}</option>`).join('');
-$('ato').innerHTML='<option value="sel">Chỉ ngày đang chọn ở trên</option><option value="wd">Tất cả T2–T6</option><option value="all">Cả tuần</option>';
+$('ato').innerHTML='<option value="sel">Chỉ ngày đang chọn ở trên</option><option value="wd">Tất cả $('ato').innerHTML='<option value="sel">Chỉ ngày đang chọn ở trên</option><option value="specific">Chọn ngày</option><option value="wd">Tất cả T2–T6</option><option value="all">Cả tuần</option>';
+$('ato').onchange=()=>{$('date-pick-wrap').classList.toggle('hide', $('ato').value!=='specific')};–T6</option><option value="all">Cả tuần</option>';
 $('aday').onchange=renderAdmin;
 $('unlock').onclick=()=>{if($('pin').value===S.pin){$('lock').classList.add('hide');$('panel').classList.remove('hide');renderAdmin()}else alert('Sai mã PIN')};
 $('lockbtn').onclick=()=>{$('panel').classList.add('hide');$('lock').classList.remove('hide');$('pin').value=''};
@@ -450,13 +465,39 @@ function renderAdmin(){
   $('alessons').querySelectorAll('[data-el]').forEach(b=>b.onclick=()=>{const l=S.lessons.find(x=>x.id===b.dataset.el);editId=l.id;
     $('ls').value=l.story||'';$('lt').value=l.title;$('lx').value=l.text;$('lb').value=l.bg;$('lm').value=l.music;$('ftitle').textContent='Sửa bài: '+l.title;$('lt').scrollIntoView({behavior:'smooth'})});
   $('alessons').querySelectorAll('[data-dl]').forEach(b=>b.onclick=()=>{if(confirm('Xóa bài này?')){S.lessons=S.lessons.filter(x=>x.id!==b.dataset.dl);save('lessons');renderAdmin()}});
+  const recent = (S.results||[]).slice(-15).reverse();
+  $('aresults').innerHTML = recent.length ? recent.map(r=>`
+    <div class="lesson">
+      <span><b>${esc(r.lesson)}</b> (${r.date})<small>⚡ ${r.wpm} wpm · 🎯 ${r.acc}% chính xác</small></span>
+      <button class="btn sm" data-delres="${r.at}">Xóa</button>
+    </div>
+  `).join('') : '<p class="sub">Chưa có kết quả nào.</p>';
+
+  $('aresults').querySelectorAll('[data-delres]').forEach(b=>b.onclick=()=>{
+    const at = +b.dataset.delres;
+    if(confirm('Xóa kết quả lần làm bài này?')){
+      S.results = S.results.filter(r=>r.at!==at);
+      save('results');
+      renderAdmin();
+      renderPick();
+    }
+  });
   $('sname').value=S.name;$('spin').value='';
 }
 $('addtask').onclick=()=>{
   const v=$('ntask').value.trim();if(!v)return;const mn=+$('nmin').value||0,to=$('ato').value;
-  const days=to==='all'?[0,1,2,3,4,5,6]:to==='wd'?[1,2,3,4,5]:[+$('aday').value];
   const lk=normLink($('ntlink').value);
-  days.forEach(d=>{const it=mn?{id:uid(),text:v,typing:mn}:{id:uid(),text:v};if(lk&&!mn)it.link=lk;(S.sched[d]=S.sched[d]||[]).push(it)});
+  if(to==='specific'){
+    const dt=$('aspecificdate').value;
+    if(!dt){alert('Vui lòng chọn ngày cụ thể');return}
+    const d=parse(dt).getDay();
+    const it=mn?{id:uid(),text:v,typing:mn}:{id:uid(),text:v};
+    if(lk&&!mn)it.link=lk;
+    (S.sched[d]=S.sched[d]||[]).push(it);
+  }else{
+    const days=to==='all'?[0,1,2,3,4,5,6]:to==='wd'?[1,2,3,4,5]:[+$('aday').value];
+    days.forEach(d=>{const it=mn?{id:uid(),text:v,typing:mn}:{id:uid(),text:v};if(lk&&!mn)it.link=lk;(S.sched[d]=S.sched[d]||[]).push(it)});
+  }
   $('ntlink').value='';$('ntask').value='';$('nmin').value='';save('sched');renderAdmin();
 };
 function readThumb(file,cb){
