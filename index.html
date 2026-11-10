@@ -368,7 +368,7 @@ function renderPick(){
     const f=fs.find(x=>x.name===openStory),s=folderStats(openStory),ls=partsOf(openStory);
     box.innerHTML=`<div class="fh"><button class="btn sm" id="bk">← Các thư mục</button></div><div class="frow" style="margin:6px 0 8px"><span class="fthumb" style="width:64px;height:48px;${thumbStyle(f)}">${f.thumb?'':`<img src="${phOf(f.name)}" alt="" style="width:70%">`}</span><span><b>📁 ${esc(f.name)}</b><br><small>✅ ${s.pct}% hoàn thành · ${statLine(s)}</small></span></div>`+
     (ls.length?ls.map(l=>{const p=bestOf(l);
-      return `<div class="lesson ${p?'done':''}"><span>${p?'✅':'📖'} ${esc(l.title)}${p?`<small>Cao nhất: <b>${p.best.wpm}</b> từ/phút · <b>${p.best.acc}%</b> chính xác · đã luyện ${p.n} lần</small>`:''}</span><button class="btn ${p?'':'main'} sm" data-play="${l.id}">${p?'typing lại':'Bắt đầu'}</button></div>`}).join(''):'<p class="sub">Thư mục này chưa có phần nào.</p>');
+      return `<div class="lesson ${p?'done':''}"><span>${p?'✅':'📖'} ${esc(l.title)}${p?`<small>Cao nhất: <b>${p.best.wpm}</b> từ/phút · <b>${p.best.acc}%</b> chính xác · đã luyện ${p.n} lần</small>`:''}</span><button class="btn ${p?'':'main'} sm" data-play="${l.id}">${p?'luyện lại':'Bắt đầu'}</button></div>`}).join(''):'<p class="sub">Thư mục này chưa có phần nào.</p>');
     $('bk').onclick=()=>{openStory=null;renderPick()};
     box.querySelectorAll('[data-play]').forEach(b=>b.onclick=()=>startLesson(b.dataset.play));
   }
