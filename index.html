@@ -155,14 +155,20 @@ label{font-size:.9rem;color:var(--soft)}
     <div id="lock" class="card"><b>Để đó cho mẹ</b><br><label>Nhập mật khẩu</label>
       <input type="text" id="pin" inputmode="numeric"><button class="btn main" id="unlock">Mở khóa</button></div>
     <div id="panel" class="hide">
-      <div class="card"><img class="ic" data-img="bow" alt=""><b>Daily Tasks</b>
-        <label>Xem / sửa ngày</label><select id="aday"></select>
+     <div class="card"><img class="ic" data-img="bow" alt=""><b>Giao việc theo ngày</b>
+        <style>input[type=date]{font:inherit;width:100%;padding:9px 12px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);margin:4px 0 10px}</style>
+        <label>Xem / sửa việc của ngày</label><input type="date" id="vday">
         <div id="atasks"></div>
-        <label>Thêm việc mới</label><input type="text" id="ntask" placeholder="vd: Đọc 10 trang sách">
-        <label>Link làm bài (không bắt buộc) — con bấm vào việc sẽ mở link này</label><input type="text" id="ntlink" placeholder="vd: https://www.ioe.vn">
-        <label>Nhập số phút luyện typing</label><input type="number" id="nmin" min="1">
-        <label>Áp dụng cho</label><select id="ato"></select>
-        <button class="btn main sm" id="addtask">+ Thêm việc</button></div>
+        <hr style="border:0;border-top:2px dashed var(--line);margin:14px 0">
+        <b>+ Giao việc mới</b><br>
+        <label>Tên việc</label><input type="text" id="ntask" placeholder="vd: Đọc sách Charlotte's Web">
+        <label>Link làm bài (không bắt buộc)</label><input type="text" id="ntlink" placeholder="vd: https://www.ioe.vn">
+        <label>Số phút luyện typing (chỉ điền nếu đây là mục luyện typing)</label><input type="number" id="nmin" min="1">
+        <label>Từ ngày</label><input type="date" id="dfrom">
+        <label>Đến ngày (bỏ trống = chỉ giao đúng 1 ngày)</label><input type="date" id="dto">
+        <label>Chỉ giao vào các thứ:</label>
+        <div id="wdbox" style="margin:4px 0 10px"></div>
+        <button class="btn main sm" id="addtask">+ Giao việc</button></div>
       <div class="card"><img class="ic" data-img="candy" alt=""><b>Thư mục câu chuyện</b>
         <div id="afolders"></div>
         <label>Tên thư mục mới</label><input type="text" id="fname" placeholder="vd: Cô bé quàng khăn đỏ">
@@ -227,7 +233,9 @@ const dayAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return ds(d)};
 const TODAY=ds(new Date());
 const uid=()=>'x'+Math.random().toString(36).slice(2,9);
 const normLink=s=>{s=(s||'').trim();return s&&!/^https?:\/\//i.test(s)?'https://'+s:s};
-const tasksFor=date=>S.sched[parse(date).getDay()]||[];
+const D=()=>S.dtasks||(S.dtasks={});
+const tasksFor=date=>D()[date]||S.sched[parse(date).getDay()]||[];
+function dayItems(date){const d=D();if(!d[date])d[date]=JSON.parse(JSON.stringify(S.sched[parse(date).getDay()]||[]));return d[date]}
 const typedSecs=date=>S.results.filter(r=>r.date===date).reduce((a,r)=>a+r.secs,0);
 const isDone=(date,t)=>t.typing?typedSecs(date)>=t.typing*60:!!(S.checks[date]||{})[t.id];
 function dayPct(date){const t=tasksFor(date);return t.length?Math.round(t.filter(x=>isDone(date,x)).length/t.length*100):0}
@@ -447,19 +455,11 @@ function renderStats(){
 }
 
 /* ---------- Admin ---------- */
-$('aday').innerHTML=[1,2,3,4,5,6,0].map(i=>`<option value="${i}">${DFULL[i]}</option>`).join('');
-$('ato').innerHTML='<option value="sel">Chỉ ngày đang chọn ở trên</option><option value="wd">Tất cả T2–T6</option><option value="all">Cả tuần</option>';
-$('aday').onchange=renderAdmin;
 $('unlock').onclick=()=>{if($('pin').value===S.pin){$('lock').classList.add('hide');$('panel').classList.remove('hide');renderAdmin()}else alert('Sai mã PIN')};
 $('lockbtn').onclick=()=>{$('panel').classList.add('hide');$('lock').classList.remove('hide');$('pin').value=''};
 let editId=null;
 function renderAdmin(){
-  const dd=+$('aday').value;
-  $('atasks').innerHTML=(S.sched[dd]||[]).map(t=>`<div class="lesson"><span>${t.typing?'⌨️ ':''}${esc(t.text)}${t.link?`<small>🔗 ${esc(t.link)}</small>`:''}</span><span>${t.typing?'':`<button class="btn sm" data-lk="${t.id}">Link</button> `}<button class="btn sm" data-dt="${t.id}">Xóa</button></span></div>`).join('')||'<p class="sub">Chưa có việc.</p>';
-  $('atasks').querySelectorAll('[data-lk]').forEach(b=>b.onclick=()=>{
-    const t=S.sched[dd].find(x=>x.id===b.dataset.lk),v=prompt('Dán link làm bài (để trống = bỏ link):',t.link||'');
-    if(v===null)return;const n=normLink(v);if(n)t.link=n;else delete t.link;save('sched');renderAdmin()});
-  $('atasks').querySelectorAll('[data-dt]').forEach(b=>b.onclick=()=>{S.sched[dd]=S.sched[dd].filter(t=>t.id!==b.dataset.dt);save('sched');renderAdmin()});
+    renderDateAdmin();
   renderFolderAdmin();
   const sm=storyMap();
   $('alessons').innerHTML=[...sm].map(([k,ls])=>`<div class="fh"><b>📁 ${esc(k)}</b></div>`+ls.map(l=>`<div class="lesson"><span>${esc(l.title)}</span><span>${S.results.some(r=>hasRes(r,l))?`<button class="btn sm" data-rl="${l.id}">Xóa kết quả</button> `:''}<button class="btn sm" data-el="${l.id}">Sửa</button> <button class="btn sm" data-dl="${l.id}">Xóa</button></span></div>`).join('')).join('')||'<p class="sub">Chưa có bài.</p>';
@@ -469,12 +469,50 @@ function renderAdmin(){
   $('alessons').querySelectorAll('[data-dl]').forEach(b=>b.onclick=()=>{if(confirm('Xóa bài này?')){S.lessons=S.lessons.filter(x=>x.id!==b.dataset.dl);save('lessons');renderAdmin()}});
   $('sname').value=S.name;$('spin').value='';
 }
+/* ===== GIAO VIỆC THEO NGÀY ===== */
+$('wdbox').innerHTML=[1,2,3,4,5,6,0].map(i=>`<label style="margin-right:10px"><input type="checkbox" class="wdc" value="${i}" checked style="width:auto;margin-right:4px">${DN[i]}</label>`).join('');
+$('vday').value=TODAY;$('dfrom').value=TODAY;
+$('vday').onchange=renderDateAdmin;
+const gidDays=t=>t.gid?Object.keys(D()).filter(d=>(D()[d]||[]).some(x=>x.gid===t.gid)).length:0;
+function renderDateAdmin(){
+  const date=$('vday').value||TODAY,items=tasksFor(date),dt=parse(date);
+  $('atasks').innerHTML=`<p class="sub" style="margin:4px 0">${DFULL[dt.getDay()]}, ${dt.getDate()}/${dt.getMonth()+1}</p>`+(items.length?'':'<p class="sub">Ngày này chưa có việc nào.</p>')+
+    items.map(t=>`<div class="lesson"><span>${t.typing?'⌨️ ':''}${esc(t.text)}${t.typing?`<small>${t.typing} phút</small>`:''}${t.link?`<small>🔗 ${esc(t.link)}</small>`:''}</span><span><button class="btn sm" data-ed="${t.id}">Sửa</button> <button class="btn sm" data-dt="${t.id}">Xóa</button></span></div>`).join('');
+  $('atasks').querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>editTask(date,b.dataset.ed));
+  $('atasks').querySelectorAll('[data-dt]').forEach(b=>b.onclick=()=>delTask(date,b.dataset.dt));
+}
+function editTask(date,id){
+  const t=dayItems(date).find(x=>x.id===id);if(!t)return;
+  const nt=prompt('Tên việc:',t.text);if(nt===null)return;
+  let nm=t.typing,nl='';
+  if(t.typing){const v=prompt('Số phút luyện typing:',t.typing);if(v===null)return;nm=Math.max(1,+v||t.typing)}
+  else{const v=prompt('Link làm bài (để trống = bỏ link):',t.link||'');if(v===null)return;nl=normLink(v)}
+  const all=gidDays(t)>1&&confirm('Việc này đã được giao cho nhiều ngày.\nBấm OK = sửa ở TẤT CẢ các ngày, Cancel = chỉ sửa ngày này.');
+  Object.keys(D()).forEach(d=>(D()[d]||[]).forEach(x=>{
+    if(x===t||(all&&x.gid===t.gid)){x.text=nt.trim()||x.text;if(x.typing)x.typing=nm;else{if(nl)x.link=nl;else delete x.link}}}));
+  save('dtasks');renderAdmin();
+}
+function delTask(date,id){
+  const t=dayItems(date).find(x=>x.id===id);if(!t||!confirm(`Xóa việc "${t.text}"?`))return;
+  const all=gidDays(t)>1&&confirm('Việc này đã được giao cho nhiều ngày.\nBấm OK = xóa ở TẤT CẢ các ngày, Cancel = chỉ xóa ngày này.');
+  Object.keys(D()).forEach(d=>{D()[d]=(D()[d]||[]).filter(x=>!(x===t||(all&&x.gid===t.gid)))});
+  save('dtasks');renderAdmin();
+}
 $('addtask').onclick=()=>{
-  const v=$('ntask').value.trim();if(!v)return;const mn=+$('nmin').value||0,to=$('ato').value;
-  const days=to==='all'?[0,1,2,3,4,5,6]:to==='wd'?[1,2,3,4,5]:[+$('aday').value];
-  const lk=normLink($('ntlink').value);
-  days.forEach(d=>{const it=mn?{id:uid(),text:v,typing:mn}:{id:uid(),text:v};if(lk&&!mn)it.link=lk;(S.sched[d]=S.sched[d]||[]).push(it)});
-  $('ntlink').value='';$('ntask').value='';$('nmin').value='';save('sched');renderAdmin();
+  const v=$('ntask').value.trim();if(!v){alert('Nhập tên việc nhé');return}
+  const from=$('dfrom').value;if(!from){alert('Chọn "Từ ngày" nhé');return}
+  const to=$('dto').value||from;if(to<from){alert('"Đến ngày" phải sau "Từ ngày"');return}
+  const wds=[...document.querySelectorAll('.wdc')].filter(c=>c.checked).map(c=>+c.value);
+  const mn=+$('nmin').value||0,lk=normLink($('ntlink').value),gid=uid();
+  let n=0,k=0;
+  for(const d=parse(from);ds(d)<=to&&k++<400;d.setDate(d.getDate()+1)){
+    if(!wds.includes(d.getDay()))continue;
+    const it={id:uid(),text:v,gid};if(mn)it.typing=mn;else if(lk)it.link=lk;
+    dayItems(ds(d)).push(it);n++;
+  }
+  if(!n){alert('Không có ngày nào khớp với các thứ bạn đã chọn');return}
+  $('ntask').value='';$('ntlink').value='';$('nmin').value='';
+  save('dtasks');renderAdmin();toast(`✅ Đã giao việc cho ${n} ngày`);
 };
 const hasRes=(r,l)=>r.lessonId===l.id||(!r.lessonId&&r.lesson===l.title);
 function renderResultsAdmin(){
