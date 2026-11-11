@@ -107,58 +107,24 @@ label{font-size:.9rem;color:var(--soft);font-weight:600}
 .deco1{left:-18px;bottom:-4px;width:86px;opacity:.95;position:fixed;z-index:10}
 .deco2{right:-6px;bottom:-4px;width:82px;position:fixed;z-index:10}
 
-/* ===== GIAO DIỆN QUẢN LÝ & LỊCH MỚI CHO MẸ CHAN ===== */
-.mode-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px;background:#fff5f8;padding:6px;border-radius:18px;border:2px solid var(--line)}
-.mode-tabs button{flex:1;min-width:135px;font:inherit;font-size:.86rem;padding:8px 10px;border:0;border-radius:13px;background:transparent;color:var(--ink);cursor:pointer;font-weight:600;transition:all .15s}
-.mode-tabs button.on{background:var(--pink);color:#5b2a46;box-shadow:0 2px 0 #f2a5c3}
-
-/* Nút Repeat & Dropdown Menu chọn Thứ + Until */
+/* Nút Repeat & 2 Dropdown gọn gàng */
 .rep-row{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;margin:4px 0 10px}
-.rep-row > .date-col{flex:1;min-width:190px}
-.rep-row > . date-col input{margin-bottom:0}
+.rep-row > .date-col{flex:1;min-width:180px}
+.rep-row > .date-col input{margin-bottom:0}
 .btn-repeat{height:44px;padding:0 18px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 3px 0 var(--line);transition:all .15s}
 .btn-repeat.on{background:var(--pink);border-color:var(--pink2);color:#5b2a46;box-shadow:0 3px 0 #f2a5c3}
 .rep-panel{background:#fff5f9;border:2px dashed var(--pink2);border-radius:18px;padding:14px;margin:6px 0 12px}
-
-.dd-wrap{position:relative;margin:4px 0 10px}
-.dd-btn{font:inherit;width:100%;padding:9px 14px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-weight:600;box-shadow:0 2px 0 var(--line)}
-.dd-btn:hover,.dd-btn.open{border-color:var(--pink2)}
-.dd-menu{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border-radius:16px;border:2px solid var(--pink2);box-shadow:0 8px 24px rgba(106,74,98,.18);padding:10px;z-index:55;max-height:290px;overflow-y:auto}
-.dd-presets{display:flex;gap:5px;flex-wrap:wrap;padding-bottom:8px;margin-bottom:8px;border-bottom:1.5px dashed var(--line)}
-.dd-item{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:10px;cursor:pointer;font-weight:600;color:var(--ink);margin:2px 0;transition:background .12s}
-.dd-item:hover{background:#fff3f7}
-.dd-item input[type=checkbox]{width:18px;height:18px;accent-color:#f78fb3;margin:0;cursor:pointer}
-
-/* Lịch tháng xem tổng quan */
-.cal-wrap{background:#fff;border:2px solid var(--line);border-radius:20px;padding:12px;margin:8px 0 12px}
-.cal-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;font-weight:700}
-.cal-dow{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:.76rem;color:var(--soft);font-weight:700;margin-bottom:4px}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.cal-cell{aspect-ratio:1.1;border-radius:12px;border:2px solid transparent;background:#fff7fa;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:.86rem;font-weight:600;position:relative;user-select:none;transition:all .12s;color:var(--ink)}
-.cal-cell:hover{border-color:var(--pink)}
-.cal-cell.empty{background:transparent;pointer-events:none}
-.cal-cell.today{background:var(--lemon)}
-.cal-cell.picked{background:var(--pink);color:#5b2a46;border-color:#e886ab;font-weight:700;box-shadow:0 2px 0 #f2a5c3}
-.cal-cell.viewing{border-color:#6a4a62;box-shadow:0 0 0 2px var(--pink)}
-.cal-cell .dot{font-size:.66rem;background:var(--mint);color:#1d593e;padding:0 5px;border-radius:99px;margin-top:1px;font-weight:700}
-
-.preview-box{background:#fff9db;border:2px dashed #f3d266;border-radius:14px;padding:10px 12px;margin:8px 0 12px;font-size:.86rem}
-.badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.73rem;font-weight:700;background:var(--sky);color:#224c71;margin-left:5px}
-.badge.rep{background:var(--lemon);color:#735613}
-.badge.def{background:#eee3ec;color:#6a4a62}
-
-.bulk-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:#fff0f5;border-radius:14px;margin:8px 0;border:1px solid var(--line)}
-.bulk-list{max-height:360px;overflow-y:auto;padding-right:4px}
-.bulk-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:14px;background:#fff;margin:6px 0;border:1.5px solid var(--line)}
-.bulk-item label{display:flex;align-items:center;gap:10px;color:var(--ink);cursor:pointer;flex:1;margin:0;font-weight:600}
-.bulk-item input[type=checkbox]{width:20px;height:20px;accent-color:#f78fb3;flex:none}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.wd-checks{display:flex;flex-wrap:wrap;gap:10px;padding:8px 10px;background:#fff;border-radius:12px;border:2px solid var(--line);margin-bottom:10px}
+.wd-checks label{color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-weight:600}
+.wd-checks input{width:17px;height:17px;accent-color:#f78fb3;margin:0}
 
-/* Modal hộp thoại xác nhận / sửa không dùng alert/confirm */
+/* Modal hộp thoại hỏi Xoá / Sửa */
 #modal-bg{position:fixed;inset:0;background:rgba(60,30,50,.55);display:flex;align-items:center;justify-content:center;z-index:90;padding:16px}
 .modal-box{background:#fff;border-radius:24px;padding:20px;max-width:440px;width:100%;box-shadow:0 6px 0 var(--line),0 12px 30px rgba(0,0,0,.2);border:3px solid var(--pink)}
 .modal-box h3{margin:0 0 10px;font-size:1.15rem}
-.modal-acts{display:flex;justify-content:flex-end;gap:8px;margin-top:14px;flex-wrap:wrap}
+.modal-acts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.modal-acts .btn{width:100%;justify-content:center;padding:10px 14px}
 
 @media(max-width:560px){
   .head{padding-right:84px}.duck{width:78px}.days{gap:3px}.day b{font-size:1rem}.day small{font-size:.68rem}
@@ -262,187 +228,91 @@ label{font-size:.9rem;color:var(--soft);font-weight:600}
   <!-- TRANG ADMIN: MẸ CHAN -->
   <section id="v-admin" class="hide">
     <div id="lock" class="card">
-      <b>🔒 Để đó cho mẹ (Mặc định: 1234)</b><br>
+      <b>🔒 Để đó cho mẹ</b><br>
       <label>Nhập mật khẩu</label>
       <input type="text" id="pin" inputmode="numeric" placeholder="Nhập PIN...">
       <button class="btn main" id="unlock">Mở khóa</button>
     </div>
 
     <div id="panel" class="hide">
-      <!-- CARD 1: TẠO & GIAO VIỆC MỚI THEO LỊCH (CALENDAR) -->
+      <!-- GIAO VIỆC THEO NGÀY (GỌN GÀNG, ĐƠN GIẢN) -->
       <div class="card">
-        <img class="ic" data-img="bow" alt="">
-        <b style="font-size:1.15rem">1. Giao bài tập mới theo Lịch (Calendar)</b>
-        <p class="sub" style="font-size:.84rem;margin-top:4px">Tạo việc và chọn ngày trên lịch. Bấm nút <b>🔁 Repeat</b> để mở menu chọn Thứ lặp lại và chọn ngày kết thúc (Until).</p>
+        <img class="ic" data-img="bow" alt=""><b>Giao việc theo ngày</b>
+        <label style="display:block;margin-top:8px">Xem / sửa / xóa việc của ngày</label>
+        <input type="date" id="vday">
+        <div id="atasks"></div>
 
-        <label>Tên việc cần giao *</label>
-        <input type="text" id="ntask" placeholder="vd: Đọc sách Charlotte's Web / Làm Toán trang 15">
+        <hr style="border:0;border-top:2px dashed var(--line);margin:16px 0">
 
-        <div class="grid2">
-          <div>
-            <label>Link làm bài (không bắt buộc)</label>
-            <input type="text" id="ntlink" placeholder="vd: https://www.ioe.vn">
-          </div>
-          <div>
-            <label>Số phút Typing (chỉ điền nếu là bài gõ phím)</label>
-            <input type="number" id="nmin" min="1" placeholder="Bỏ trống nếu là việc thường">
-          </div>
-        </div>
+        <b>+ Giao việc mới</b><br>
+        <label>Tên việc</label>
+        <input type="text" id="ntask" placeholder="vd: Đọc sách Charlotte's Web">
+        <label>Link làm bài (không bắt buộc)</label>
+        <input type="text" id="ntlink" placeholder="vd: https://www.ioe.vn">
+        <label>Số phút luyện typing (chỉ điền nếu đây là mục luyện typing)</label>
+        <input type="number" id="nmin" min="1">
 
         <div class="rep-row">
           <div class="date-col">
-            <label>📅 Ngày bắt đầu làm (Start date)</label>
-            <input type="date" id="dstart" style="margin-bottom:0">
+            <label>Chọn ngày làm (Calendar)</label>
+            <input type="date" id="dfrom">
           </div>
           <div>
             <button type="button" class="btn-repeat" id="btn-repeat">
-              <span>🔁 Repeat:</span> <b id="rep-state-txt">Tắt (Chỉ 1 ngày)</b>
+              🔁 Repeat: <span id="rep-txt">Tắt</span>
             </button>
           </div>
         </div>
 
-        <!-- Khung tuỳ chọn khi bật nút Repeat: gồm 2 Dropdown Chọn Thứ & Chọn Until -->
-        <div id="repeat-box" class="rep-panel hide">
+        <!-- Khi bấm nút Repeat sẽ hiện 2 Dropdown này -->
+        <div id="rep-box" class="rep-panel hide">
           <div class="grid2">
-            <!-- Dropdown 1: Chọn thứ lặp lại -->
             <div>
-              <label>📌 Lặp lại vào thứ ( Chọn thứ ):</label>
-              <div class="dd-wrap" id="dd-wd-wrap">
-                <button type="button" class="dd-btn" id="dd-wd-btn">
-                  <span id="dd-wd-text">Every Mon (Thứ 2)</span>
-                  <span>▾</span>
-                </button>
-                <div class="dd-menu hide" id="dd-wd-menu">
-                  <div class="dd-presets">
-                    <button type="button" class="btn xs" data-wpset="all">Mỗi ngày</button>
-                    <button type="button" class="btn xs" data-wpset="wk">Thứ 2 – Thứ 6</button>
-                    <button type="button" class="btn xs" data-wpset="we">Thứ 7 & CN</button>
-                    <button type="button" class="btn xs" data-wpset="clr">Bỏ chọn</button>
-                  </div>
-                  <div id="dd-wd-list"></div>
-                </div>
-              </div>
+              <label>Lặp lại vào thứ:</label>
+              <select id="rep-day">
+                <option value="1">Mỗi Thứ 2 (Every Mon)</option>
+                <option value="2">Mỗi Thứ 3 (Every Tue)</option>
+                <option value="3">Mỗi Thứ 4 (Every Wed)</option>
+                <option value="4">Mỗi Thứ 5 (Every Thu)</option>
+                <option value="5">Mỗi Thứ 6 (Every Fri)</option>
+                <option value="6">Mỗi Thứ 7 (Every Sat)</option>
+                <option value="0">Mỗi Chủ nhật (Every Sun)</option>
+                <option value="all">Mỗi ngày (T2 – CN)</option>
+                <option value="wk">Thứ 2 – Thứ 6</option>
+                <option value="we">Thứ 7 & Chủ nhật</option>
+                <option value="custom">Tự chọn nhiều thứ...</option>
+              </select>
             </div>
-
-            <!-- Dropdown 2: Chọn Until (Cho đến khi) -->
             <div>
-              <label>⏳ Until (Lặp cho đến khi):</label>
-              <select id="dd-until" style="margin-top:4px">
-                <option value="custom">📅 Chọn ngày kết thúc trên lịch...</option>
-                <option value="eow">Hết tuần này (Chủ nhật)</option>
-                <option value="1w">Sau 1 tuần (+7 ngày)</option>
-                <option value="2w">Sau 2 tuần (+14 ngày)</option>
+              <label>Until (Cho đến khi):</label>
+              <select id="rep-until">
+                <option value="1w">Sau 1 tuần</option>
+                <option value="2w">Sau 2 tuần</option>
+                <option value="1m" selected>Sau 1 tháng</option>
+                <option value="2m">Sau 2 tháng</option>
+                <option value="3m">Sau 3 tháng</option>
                 <option value="eom">Hết tháng này</option>
-                <option value="1m" selected>Sau 1 tháng (+30 ngày)</option>
-                <option value="2m">Sau 2 tháng (+60 ngày)</option>
-                <option value="3m">Sau 3 tháng (+90 ngày)</option>
+                <option value="custom">Chọn ngày cụ thể trên lịch...</option>
               </select>
             </div>
           </div>
 
-          <!-- Ô chọn ngày Until cụ thể trên Calendar -->
-          <div id="until-date-wrap" style="margin-top:4px">
-            <label>🗓️ Ngày kết thúc lặp (Until date):</label>
-            <input type="date" id="duntil" style="margin-bottom:0">
+          <!-- Chỉ hiện khi chọn "Tự chọn nhiều thứ..." -->
+          <div id="wd-custom-box" class="wd-checks hide"></div>
+
+          <!-- Ô chọn ngày kết thúc (Until) -->
+          <div id="until-custom-box">
+            <label>Đến ngày (Until date):</label>
+            <input type="date" id="dto" style="margin-bottom:0">
           </div>
         </div>
 
-        <div class="preview-box" id="assign-preview"></div>
-        <button class="btn main" id="addtask">✨ + Giao việc ngay</button>
+        <button class="btn main sm" id="addtask">+ Giao việc</button>
       </div>
 
-      <!-- CARD 2: XEM LỊCH THÁNG & XOÁ HÀNG LOẠT -->
+      <!-- THƯ MỤC CÂU CHUYỆN TYPING -->
       <div class="card">
-        <img class="ic" data-img="star" alt="">
-        <b style="font-size:1.15rem">2. Lịch công việc & Xoá task hàng loạt</b>
-
-        <div style="margin:10px 0;padding:10px 12px;background:#fff7fa;border-radius:14px;border:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-          <label style="color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:8px;margin:0">
-            <input type="checkbox" id="use-def-sched" style="width:18px;height:18px;accent-color:#f78fb3">
-            <span>Tự động dùng lịch mẫu cố định cho những ngày chưa giao việc riêng</span>
-          </label>
-          <small class="sub" style="margin:0">Tắt đi nếu mẹ chỉ muốn hiện đúng các việc mẹ tự giao theo Calendar</small>
-        </div>
-
-        <!-- Lịch tổng quan của Mẹ để bấm vào ngày xem việc -->
-        <div class="cal-wrap">
-          <div class="cal-hdr">
-            <button type="button" class="btn sm" id="av-prev">‹</button>
-            <span id="av-label"></span>
-            <button type="button" class="btn sm" id="av-next">›</button>
-          </div>
-          <div class="cal-dow"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span></div>
-          <div class="cal-grid" id="av-grid"></div>
-        </div>
-
-        <!-- Tab chuyển chế độ xem & xoá -->
-        <div class="mode-tabs" id="manage-tabs">
-          <button type="button" data-mt="day" class="on">📌 Việc của ngày đang chọn</button>
-          <button type="button" data-mt="series">🔁 Xoá theo chuỗi việc lặp lại</button>
-          <button type="button" data-mt="range">🗑️ Tìm & Xoá hàng loạt theo ngày</button>
-        </div>
-
-        <!-- Tab 2A: Xem/sửa/xoá hàng loạt trong 1 ngày -->
-        <div id="mt-day">
-          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px">
-            <label style="margin:0">Ngày đang xem:</label>
-            <input type="date" id="vday" style="width:auto;margin:0;padding:6px 10px">
-            <button type="button" class="btn sm" id="vday-today">Hôm nay</button>
-          </div>
-          <div class="bulk-toolbar" id="day-bulk-bar">
-            <label style="color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:6px;margin:0">
-              <input type="checkbox" id="day-chk-all" style="width:18px;height:18px;accent-color:#f78fb3">
-              <span>Chọn tất cả việc ngày này</span>
-            </label>
-            <div style="display:flex;gap:6px;flex-wrap:wrap">
-              <button type="button" class="btn bad sm" id="day-del-sel">🗑 Xoá mục đã chọn (<span id="day-sel-cnt">0</span>)</button>
-              <button type="button" class="btn bad sm" id="day-del-all">💥 Xoá sạch ngày này</button>
-            </div>
-          </div>
-          <div id="atasks" class="bulk-list"></div>
-        </div>
-
-        <!-- Tab 2B: Quản lý & Xoá hàng loạt theo Chuỗi việc đã tạo (Every Mon/Tue...) -->
-        <div id="mt-series" class="hide">
-          <small class="sub" style="display:block;margin-bottom:6px">Mỗi lần mẹ giao việc lặp lại nhiều ngày, hệ thống gom thành 1 nhóm. Mẹ có thể tích chọn nhiều nhóm để xoá hàng loạt:</small>
-          <div class="bulk-toolbar">
-            <label style="color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:6px;margin:0">
-              <input type="checkbox" id="ser-chk-all" style="width:18px;height:18px;accent-color:#f78fb3">
-              <span>Chọn tất cả chuỗi việc</span>
-            </label>
-            <button type="button" class="btn bad sm" id="ser-del-sel">🗑 Xoá các chuỗi đã chọn (<span id="ser-sel-cnt">0</span>)</button>
-          </div>
-          <div id="aseries" class="bulk-list"></div>
-        </div>
-
-        <!-- Tab 2C: Lọc theo khoảng ngày & Xoá hàng loạt -->
-        <div id="mt-range" class="hide">
-          <div class="grid2">
-            <div>
-              <label>Lọc từ ngày</label>
-              <input type="date" id="rfrom">
-            </div>
-            <div>
-              <label>Đến ngày</label>
-              <input type="date" id="rto">
-            </div>
-          </div>
-          <label>Lọc theo tên việc (bỏ trống = lấy tất cả)</label>
-          <input type="text" id="rkw" placeholder="Nhập từ khóa tên việc cần tìm...">
-          <div class="bulk-toolbar">
-            <label style="color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:6px;margin:0">
-              <input type="checkbox" id="rng-chk-all" style="width:18px;height:18px;accent-color:#f78fb3">
-              <span>Chọn tất cả kết quả (<span id="rng-total-cnt">0</span>)</span>
-            </label>
-            <button type="button" class="btn bad sm" id="rng-del-sel">🗑 Xoá hàng loạt mục đã chọn (<span id="rng-sel-cnt">0</span>)</button>
-          </div>
-          <div id="arange" class="bulk-list"></div>
-        </div>
-      </div>
-
-      <!-- CARD 3: THƯ MỤC CÂU CHUYỆN TYPING -->
-      <div class="card">
-        <img class="ic" data-img="candy" alt=""><b>3. Thư mục câu chuyện</b>
+        <img class="ic" data-img="candy" alt=""><b>Thư mục câu chuyện</b>
         <div id="afolders"></div>
         <label>Tên thư mục mới</label><input type="text" id="fname" placeholder="vd: Cô bé quàng khăn đỏ">
         <label>Ảnh thumbnail (chọn ảnh từ máy, có thể bỏ trống)</label><input type="file" id="fimg" accept="image/*">
@@ -450,15 +320,15 @@ label{font-size:.9rem;color:var(--soft);font-weight:600}
         <input type="file" id="fimg2" accept="image/*" hidden>
       </div>
 
-      <!-- CARD 4: DANH SÁCH BÀI TYPING -->
+      <!-- DANH SÁCH BÀI TYPING -->
       <div class="card">
-        <img class="ic" data-img="icecream" alt=""><b>4. Bài luyện typing</b>
+        <img class="ic" data-img="icecream" alt=""><b>Bài luyện typing</b>
         <div id="alessons"></div>
       </div>
 
-      <!-- CARD 5: THÊM / SỬA BÀI TYPING -->
+      <!-- THÊM / SỬA BÀI TYPING -->
       <div class="card">
-        <b id="ftitle">Thêm bài luyện typing mới</b><br>
+        <b id="ftitle">Thêm bài mới</b><br>
         <label>Thuộc thư mục</label><select id="ls"></select>
         <label>Tên phần</label><input type="text" id="lt" placeholder="vd: Phần 1">
         <label>Nội dung để con luyện typing</label><textarea id="lx" rows="4"></textarea>
@@ -466,29 +336,29 @@ label{font-size:.9rem;color:var(--soft);font-weight:600}
         <label>Link nhạc (URL file mp3, có thể bỏ trống)</label><input type="text" id="lm">
         <label style="display:block;margin-bottom:8px;cursor:pointer">
           <input type="checkbox" id="lsplit" style="width:auto;margin-right:6px">
-          Tách thành nhiều phần: mỗi đoạn cách nhau bằng 1 dòng trống sẽ là 1 phần
+          Tách thành nhiều phần: mỗi đoạn cách nhau bằng 1 dòng trống sẽ là 1 phần (tên phần = Tên phần + số)
         </label>
         <button class="btn main" id="savel">Lưu bài</button>
         <button class="btn sm" id="clearl">Làm mới</button>
       </div>
 
-      <!-- CARD 6: LỊCH SỬ KẾT QUẢ TYPING -->
+      <!-- LỊCH SỬ KẾT QUẢ TYPING -->
       <div class="card">
-        <img class="ic" data-img="cloud" alt=""><b>5. Kết quả luyện typing</b>
+        <img class="ic" data-img="cloud" alt=""><b>Kết quả luyện typing</b>
         <small class="sub" style="display:block;margin:4px 0">Xóa lần luyện nhầm để không tính vào tốc độ, độ chính xác và số phút.</small>
         <div id="ares"></div>
       </div>
 
-      <!-- CARD 7: CÀI ĐẶT & SAO LƯU -->
+      <!-- CÀI ĐẶT & SAO LƯU -->
       <div class="card">
-        <b>6. Cài đặt & Sao lưu</b><br>
-        <label>Tên hiển thị của веб</label><input type="text" id="sname">
-        <label>Đổi mật khẩu Mẹ Chan</label><input type="text" id="spin" placeholder="Để trống nếu giữ nguyên">
+        <b>Cài đặt</b><br>
+        <label>Tên hiển thị</label><input type="text" id="sname">
+        <label>Đổi mật khẩu</label><input type="text" id="spin">
         <button class="btn main sm" id="ssave">Lưu cài đặt</button>
         <hr style="border:0;border-top:2px dashed var(--line);margin:14px 0">
-        <button class="btn sm" id="exp">⬇ Sao lưu dữ liệu (.json)</button>
+        <button class="btn sm" id="exp">⬇ Sao lưu dữ liệu</button>
         <label class="btn sm" style="display:inline-flex;cursor:pointer">⬆ Khôi phục<input type="file" id="imp" accept=".json" hidden></label>
-        <button class="btn sm" id="lockbtn">🔒 Khóa lại</button>
+        <button class="btn sm" id="lockbtn">Khóa lại</button>
       </div>
     </div>
   </section>
@@ -671,8 +541,8 @@ function askConfirm(title,msg,onYes,yesTxt='Đồng ý',isBad=false){
   $('m-title').textContent=title;
   $('m-body').innerHTML=`<p style="margin:0;line-height:1.5">${msg}</p>`;
   $('m-acts').innerHTML=`
-    <button type="button" class="btn sm" id="m-no">Hủy</button>
-    <button type="button" class="btn sm ${isBad?'bad':'main'}" id="m-yes">${esc(yesTxt)}</button>
+    <button type="button" class="btn ${isBad?'bad':'main'}" id="m-yes">${esc(yesTxt)}</button>
+    <button type="button" class="btn" id="m-no">Hủy</button>
   `;
   $('modal-bg').classList.remove('hide');
   $('m-no').onclick=closeModal;
@@ -684,13 +554,13 @@ const D=()=>S.dtasks||(S.dtasks={});
 function tasksFor(date){
   const d=D();
   if(Object.prototype.hasOwnProperty.call(d,date)) return d[date]||[];
-  if(S.useDefaultSched!==false) return (S.sched&&S.sched[parse(date).getDay()])||[];
-  return [];
+  const cut=(S.cutoffs||{})[parse(date).getDay()];
+  return ((S.sched&&S.sched[parse(date).getDay()])||[]).filter(t=>!(cut&&cut[t.id]&&date>=cut[t.id]));
 }
 function dayItems(date){
   const d=D();
   if(!Object.prototype.hasOwnProperty.call(d,date)){
-    d[date]=S.useDefaultSched!==false ? JSON.parse(JSON.stringify((S.sched&&S.sched[parse(date).getDay()])||[])) : [];
+    d[date]=JSON.parse(JSON.stringify(tasksFor(date)));
   }
   return d[date];
 }
@@ -718,7 +588,7 @@ function view(v){
 }
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>view(b.dataset.v));
 
-/* ---------- 1. LỊCH TUẦN ---------- */
+/* ---------- 1. LỊCH TUẦN TRANG CHỦ ---------- */
 let wk=0,sel=TODAY;
 function monday(off){const d=new Date();const k=(d.getDay()+6)%7;d.setDate(d.getDate()-k+off*7);return d}
 $('pw').onclick=()=>{wk--;sel=ds(addD(monday(wk),0));renderHome()};
@@ -1017,531 +887,209 @@ function renderStats(){
     <p>${cur.rs.length===0?'Chưa có bài luyện nào trong giai đoạn này.':cur.wpm>=pre.wpm&&cur.acc>=pre.acc?'Bắp đang rất tiến bộ! 🌟':'Cứ đều đặn mỗi ngày là sẽ giỏi hơn nhé 💪'}</p>`;
 }
 
-/* ---------- 4. ADMIN PANEL: MẸ CHAN (GIAO VIỆC THEO LỊCH & XOÁ HÀNG LOẠT) ---------- */
+/* ---------- 4. ADMIN PANEL: MẸ CHAN ---------- */
 $('unlock').onclick=()=>{
   if($('pin').value===S.pin){
     $('lock').classList.add('hide');$('panel').classList.remove('hide');renderAdmin();
-  }else toast('⚠️ Sai mật khẩu rồi mẹ ơi!');
+  }else toast('⚠️ Sai mã PIN');
 };
 $('pin').addEventListener('keydown',e=>{if(e.key==='Enter')$('unlock').click()});
 $('lockbtn').onclick=()=>{$('panel').classList.add('hide');$('lock').classList.remove('hide');$('pin').value=''};
 
-let isRepeat=false;
-let manageTab='day';     // 'day' | 'series' | 'range'
-let avYear=new Date().getFullYear(), avMonth=new Date().getMonth();
-
-// Khởi tạo ngày mặc định cho bộ công cụ Giao Việc
-$('dstart').value=TODAY;
-$('duntil').value=ds(addD(new Date(),30)); // Mặc định Until 1 tháng sau
+/* ===== GIAO VIỆC THEO NGÀY (NÚT REPEAT + 2 DROPDOWN + XOÁ TỪ NGÀY NÀY TRỞ VỀ SAU) ===== */
+let repeatOn=false;
+$('wd-custom-box').innerHTML=[1,2,3,4,5,6,0].map(i=>`<label><input type="checkbox" class="wdc" value="${i}" checked>${DN[i]}</label>`).join('');
 $('vday').value=TODAY;
-$('rfrom').value=TODAY;
-$('rto').value=ds(addD(new Date(),60));
+$('dfrom').value=TODAY;
+$('dto').value=ds(addD(new Date(),30));
 
-// Khởi tạo danh sách Thứ trong Dropdown 1 (Every Mon/Tue/...)
-const WD_LABELS=[
-  {v:1,s:'Every Mon (Thứ 2)',short:'T2'},
-  {v:2,s:'Every Tue (Thứ 3)',short:'T3'},
-  {v:3,s:'Every Wed (Thứ 4)',short:'T4'},
-  {v:4,s:'Every Thu (Thứ 5)',short:'T5'},
-  {v:5,s:'Every Fri (Thứ 6)',short:'T6'},
-  {v:6,s:'Every Sat (Thứ 7)',short:'T7'},
-  {v:0,s:'Every Sun (Chủ nhật)',short:'CN'}
-];
-$('dd-wd-list').innerHTML=WD_LABELS.map(w=>`
-  <label class="dd-item">
-    <input type="checkbox" class="wdc" value="${w.v}" checked>
-    <span>${w.s}</span>
-  </label>
-`).join('');
-
-function updateWdDropdownText(){
-  const checked=[...document.querySelectorAll('.wdc:checked')].map(c=>+c.value);
-  let txt='Chưa chọn thứ nào';
-  if(checked.length===7) txt='Mỗi ngày (Every Mon – Sun)';
-  else if(checked.length===5 && [1,2,3,4,5].every(x=>checked.includes(x))) txt='Every Mon – Fri (Thứ 2 – Thứ 6)';
-  else if(checked.length===2 && [6,0].every(x=>checked.includes(x))) txt='Cuối tuần (Thứ 7 & CN)';
-  else if(checked.length===1){
-    const found=WD_LABELS.find(w=>w.v===checked[0]);
-    txt=found?found.s:'1 ngày/tuần';
-  }else if(checked.length>1){
-    const shorts=WD_LABELS.filter(w=>checked.includes(w.v)).map(w=>w.short);
-    txt='Every '+shorts.join(', ');
-  }
-  $('dd-wd-text').textContent=txt;
-}
-
-// Đóng/mở menu Dropdown Chọn Thứ
-$('dd-wd-btn').onclick=e=>{
-  e.stopPropagation();
-  const m=$('dd-wd-menu'),open=m.classList.toggle('hide');
-  $('dd-wd-btn').classList.toggle('open',!open);
-};
-$('dd-wd-menu').onclick=e=>e.stopPropagation();
-document.addEventListener('click',()=>{
-  if($('dd-wd-menu'))$('dd-wd-menu').classList.add('hide');
-  if($('dd-wd-btn'))$('dd-wd-btn').classList.remove('open');
-});
-
-document.querySelectorAll('.wdc').forEach(cb=>{
-  cb.onchange=()=>{updateWdDropdownText();updateAssignPreview()};
-});
-
-function setWds(arr){
-  document.querySelectorAll('.wdc').forEach(cb=>{cb.checked=arr.includes(+cb.value)});
-  updateWdDropdownText();
-  updateAssignPreview();
-}
-document.querySelectorAll('[data-wpset]').forEach(btn=>btn.onclick=()=>{
-  const k=btn.dataset.wpset;
-  if(k==='all')setWds([1,2,3,4,5,6,0]);
-  else if(k==='wk')setWds([1,2,3,4,5]);
-  else if(k==='we')setWds([6,0]);
-  else setWds([]);
-});
-
-// Tính ngày Until dựa trên Dropdown 2 (Until)
-function syncUntilDateFromPreset(){
-  const mode=$('dd-until').value;
-  const startStr=$('dstart').value||TODAY;
+function syncUntilInput(){
+  const u=$('rep-until').value;
+  const startStr=$('dfrom').value||TODAY;
   const st=parse(startStr);
-  if(mode==='custom'){
-    if($('duntil').value<startStr)$('duntil').value=startStr;
-  }else if(mode==='eow'){
-    const day=st.getDay(),diff=day===0?0:(7-day);
-    $('duntil').value=ds(addD(st,diff));
-  }else if(mode==='1w'){
-    $('duntil').value=ds(addD(st,7));
-  }else if(mode==='2w'){
-    $('duntil').value=ds(addD(st,14));
-  }else if(mode==='eom'){
-    $('duntil').value=ds(new Date(st.getFullYear(),st.getMonth()+1,0));
-  }else if(mode==='1m'){
-    $('duntil').value=ds(addD(st,30));
-  }else if(mode==='2m'){
-    $('duntil').value=ds(addD(st,60));
-  }else if(mode==='3m'){
-    $('duntil').value=ds(addD(st,90));
-  }
+  if(u==='1w') $('dto').value=ds(addD(st,7));
+  else if(u==='2w') $('dto').value=ds(addD(st,14));
+  else if(u==='1m') $('dto').value=ds(addD(st,30));
+  else if(u==='2m') $('dto').value=ds(addD(st,60));
+  else if(u==='3m') $('dto').value=ds(addD(st,90));
+  else if(u==='eom') $('dto').value=ds(new Date(st.getFullYear(),st.getMonth()+1,0));
+  else if($('dto').value<startStr) $('dto').value=startStr;
 }
 
-// Bật / Tắt nút 🔁 Repeat
 $('btn-repeat').onclick=()=>{
-  isRepeat=!isRepeat;
-  $('btn-repeat').classList.toggle('on',isRepeat);
-  $('rep-state-txt').textContent=isRepeat?'Đang bật':'Tắt (Chỉ 1 ngày)';
-  $('repeat-box').classList.toggle('hide',!isRepeat);
-  if(isRepeat){
-    // Mặc định tích sẵn thứ của ngày Start Date nếu chưa chọn gì
-    const stDay=parse($('dstart').value||TODAY).getDay();
-    const checked=[...document.querySelectorAll('.wdc:checked')];
-    if(!checked.length)setWds([stDay]);
-    syncUntilDateFromPreset();
+  repeatOn=!repeatOn;
+  $('btn-repeat').classList.toggle('on',repeatOn);
+  $('rep-txt').textContent=repeatOn?'Bật':'Tắt';
+  $('rep-box').classList.toggle('hide',!repeatOn);
+  if(repeatOn){
+    const wd=parse($('dfrom').value||TODAY).getDay();
+    if(['0','1','2','3','4','5','6'].includes(String(wd))) $('rep-day').value=String(wd);
+    syncUntilInput();
   }
-  updateAssignPreview();
 };
 
-$('dstart').onchange=()=>{
-  if(isRepeat && $('dd-until').value!=='custom') syncUntilDateFromPreset();
-  else if($('duntil').value<$('dstart').value) $('duntil').value=$('dstart').value;
-  updateAssignPreview();
+$('dfrom').onchange=()=>{
+  if(repeatOn && $('rep-until').value!=='custom') syncUntilInput();
 };
-$('dd-until').onchange=()=>{
-  syncUntilDateFromPreset();
-  updateAssignPreview();
+$('rep-day').onchange=()=>{
+  $('wd-custom-box').classList.toggle('hide',$('rep-day').value!=='custom');
 };
-$('duntil').onchange=()=>{
-  $('dd-until').value='custom';
-  updateAssignPreview();
+$('rep-until').onchange=()=>{
+  syncUntilInput();
 };
-
-// Tính toán danh sách các ngày sẽ được giao
-function getTargetDates(){
-  const start=$('dstart').value;
-  if(!start)return [];
-  if(!isRepeat)return [start];
-
-  const until=$('duntil').value||start;
-  if(until<start)return [];
-  const wds=[...document.querySelectorAll('.wdc:checked')].map(c=>+c.value);
-  if(!wds.length)return [];
-  const out=[];
-  let k=0;
-  for(const d=parse(start);ds(d)<=until&&k++<730;d.setDate(d.getDate()+1)){
-    if(wds.includes(d.getDay()))out.push(ds(d));
-  }
-  return out;
-}
-
-function updateAssignPreview(){
-  const dates=getTargetDates();
-  const box=$('assign-preview');
-  if(!dates.length){
-    box.innerHTML='⚠️ Chưa có ngày nào khớp. Mẹ hãy kiểm tra lại Thứ lặp lại hoặc ngày Until nhé!';
-    return;
-  }
-  if(!isRepeat){
-    const dt=parse(dates[0]);
-    box.innerHTML=`📅 Sẽ giao vào <b>1 ngày duy nhất</b>: ${DFULL[dt.getDay()]}, ${fmtVN(dates[0])} <small style="color:var(--soft)">(Bấm nút <b>🔁 Repeat</b> nếu muốn lặp lại hàng tuần)</small>`;
-    return;
-  }
-  const sample=dates.slice(0,5).map(d=>{const dt=parse(d);return `${DN[dt.getDay()]} (${dt.getDate()}/${dt.getMonth()+1})`}).join(', ');
-  box.innerHTML=`🔁 <b>${esc($('dd-wd-text').textContent)}</b> · Until <b>${fmtVN($('duntil').value)}</b> ➜ Tổng cộng <b>${dates.length} buổi</b>: ${sample}${dates.length>5?' ...':''}`;
-}
-
-// Nút "+ Giao việc ngay"
-$('addtask').onclick=()=>{
-  const v=$('ntask').value.trim();
-  if(!v){toast('⚠️ Mẹ nhập tên việc cần giao nhé!');$('ntask').focus();return}
-  const dates=getTargetDates();
-  if(!dates.length){toast('⚠️ Không có ngày nào khớp với lựa chọn của mẹ!');return}
-
-  const mn=+$('nmin').value||0,lk=normLink($('ntlink').value),gid=uid();
-  const ruleLabel = !isRepeat
-    ? `Ngày ${fmtVN(dates[0])}`
-    : `${$('dd-wd-text').textContent} · Until ${fmtVN($('duntil').value)}`;
-
-  dates.forEach(dStr=>{
-    const it={id:uid(),text:v,gid,rule:ruleLabel};
-    if(mn)it.typing=mn;else if(lk)it.link=lk;
-    dayItems(dStr).push(it);
-  });
-
-  $('ntask').value='';$('ntlink').value='';$('nmin').value='';
-  $('vday').value=dates[0];
-  save('dtasks');
-  renderAdmin();
-  toast(`✅ Đã giao "${v}" cho ${dates.length} ngày!`);
+$('dto').onchange=()=>{
+  $('rep-until').value='custom';
 };
 
-/* ===== QUẢN LÝ LỊCH & XOÁ HÀNG LOẠT ===== */
-$('use-def-sched').onchange=e=>{
-  S.useDefaultSched=e.target.checked;
-  save('useDefaultSched');
-  renderAdmin();
-  toast(S.useDefaultSched?'Đã bật lịch mẫu mặc định':'Đã tắt lịch mẫu — chỉ hiện việc mẹ giao trên lịch');
-};
+$('vday').onchange=renderDateAdmin;
 
-$('av-prev').onclick=()=>{avMonth--;if(avMonth<0){avMonth=11;avYear--}renderOverviewCal()};
-$('av-next').onclick=()=>{avMonth++;if(avMonth>11){avMonth=0;avYear++}renderOverviewCal()};
-
-function renderOverviewCal(){
-  $('av-label').textContent=`Lịch công việc Tháng ${avMonth+1} / ${avYear}`;
-  const first=new Date(avYear,avMonth,1);
-  const startOffset=(first.getDay()+6)%7;
-  const daysInMonth=new Date(avYear,avMonth+1,0).getDate();
-  const curView=$('vday').value||TODAY;
-  let h='';
-  for(let i=0;i<startOffset;i++)h+='<div class="cal-cell empty"></div>';
-  for(let d=1;d<=daysInMonth;d++){
-    const s=ds(new Date(avYear,avMonth,d));
-    const cnt=tasksFor(s).length;
-    h+=`<div class="cal-cell ${s===TODAY?'today':''} ${s===curView?'viewing':''}" data-vd="${s}">
-      <span>${d}</span>
-      ${cnt?`<span class="dot">${cnt} việc</span>`:''}
-    </div>`;
-  }
-  $('av-grid').innerHTML=h;
-  $('av-grid').querySelectorAll('[data-vd]').forEach(c=>c.onclick=()=>{
-    $('vday').value=c.dataset.vd;
-    if(manageTab!=='day')switchManageTab('day');
-    else renderDateAdmin();
-    renderOverviewCal();
-  });
-}
-
-function switchManageTab(mt){
-  manageTab=mt;
-  document.querySelectorAll('#manage-tabs button').forEach(b=>b.classList.toggle('on',b.dataset.mt===mt));
-  $('mt-day').classList.toggle('hide',mt!=='day');
-  $('mt-series').classList.toggle('hide',mt!=='series');
-  $('mt-range').classList.toggle('hide',mt!=='range');
-  if(mt==='day')renderDateAdmin();
-  if(mt==='series')renderSeriesAdmin();
-  if(mt==='range')renderRangeAdmin();
-}
-document.querySelectorAll('#manage-tabs button').forEach(b=>b.onclick=()=>switchManageTab(b.dataset.mt));
-
-$('vday').onchange=()=>{
-  const dt=parse($('vday').value||TODAY);
-  avYear=dt.getFullYear();avMonth=dt.getMonth();
-  renderOverviewCal();renderDateAdmin();
-};
-$('vday-today').onclick=()=>{
-  $('vday').value=TODAY;
-  const dt=parse(TODAY);avYear=dt.getFullYear();avMonth=dt.getMonth();
-  renderOverviewCal();renderDateAdmin();
-};
-
-const gidDays=t=>t.gid?Object.keys(D()).filter(d=>(D()[d]||[]).some(x=>x.gid===t.gid)).length:0;
-
-/* --- TAB 2A: XEM & XOÁ VIỆC TRONG NGÀY ĐANG CHỌN --- */
 function renderDateAdmin(){
   const date=$('vday').value||TODAY,items=tasksFor(date),dt=parse(date);
-  const isCustomDay=Object.prototype.hasOwnProperty.call(D(),date);
-  $('day-chk-all').checked=false;
-  $('day-sel-cnt').textContent='0';
+  $('atasks').innerHTML=`<p class="sub" style="margin:4px 0">${DFULL[dt.getDay()]}, ${dt.getDate()}/${dt.getMonth()+1}/${dt.getFullYear()}</p>`+
+    (items.length?'':'<p class="sub">Ngày này chưa có việc nào.</p>')+
+    items.map(t=>`<div class="lesson">
+      <span>
+        ${t.typing?'⌨️ ':''}${esc(t.text)}
+        ${t.typing?`<small>${t.typing} phút</small>`:''}
+        ${t.link?`<small>🔗 ${esc(t.link)}</small>`:''}
+      </span>
+      <span>
+        <button class="btn sm" data-ed="${t.id}">Sửa</button>
+        <button class="btn sm bad" data-dt="${t.id}">Xóa</button>
+      </span>
+    </div>`).join('');
 
-  if(!items.length){
-    $('atasks').innerHTML=`<p class="sub" style="margin:8px 0">${DFULL[dt.getDay()]}, ${fmtVN(date)} — Ngày này trống, chưa có việc nào.</p>`;
-    return;
-  }
-
-  $('atasks').innerHTML=`<p class="sub" style="margin:4px 0">${DFULL[dt.getDay()]}, ${fmtVN(date)} (${items.length} việc)</p>`+
-    items.map(t=>{
-      const gCount=gidDays(t);
-      return `<div class="bulk-item">
-        <label>
-          <input type="checkbox" class="day-item-chk" value="${t.id}">
-          <span>
-            ${t.typing?'⌨️ ':'📝 '}${esc(t.text)}
-            ${t.typing?`<span class="badge">${t.typing} phút</span>`:''}
-            ${gCount>1?`<span class="badge rep">Lặp ${gCount} ngày</span>`:''}
-            ${!isCustomDay?`<span class="badge def">Lịch mẫu</span>`:''}
-            ${t.link?`<small style="display:block;color:var(--soft)">🔗 ${esc(t.link)}</small>`:''}
-          </span>
-        </label>
-        <span style="display:flex;gap:4px;flex:none">
-          <button class="btn xs" data-ed="${t.id}">Sửa</button>
-          <button class="btn xs bad" data-dt="${t.id}">Xóa</button>
-        </span>
-      </div>`;
-    }).join('');
-
-  const updateDaySelCount=()=>{
-    const c=[...$('atasks').querySelectorAll('.day-item-chk:checked')].length;
-    $('day-sel-cnt').textContent=c;
-  };
-  $('atasks').querySelectorAll('.day-item-chk').forEach(cb=>cb.onchange=updateDaySelCount);
-  $('day-chk-all').onchange=e=>{
-    $('atasks').querySelectorAll('.day-item-chk').forEach(cb=>cb.checked=e.target.checked);
-    updateDaySelCount();
-  };
-
-  $('atasks').querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>openEditTaskModal(date,b.dataset.ed));
-  $('atasks').querySelectorAll('[data-dt]').forEach(b=>b.onclick=()=>openDelTaskModal(date,b.dataset.dt));
+  $('atasks').querySelectorAll('[data-ed]').forEach(b=>b.onclick=()=>editTask(date,b.dataset.ed));
+  $('atasks').querySelectorAll('[data-dt]').forEach(b=>b.onclick=()=>delTask(date,b.dataset.dt));
 }
 
-// Xoá các mục đã chọn trong ngày
-$('day-del-sel').onclick=()=>{
-  const date=$('vday').value||TODAY;
-  const ids=[...$('atasks').querySelectorAll('.day-item-chk:checked')].map(c=>c.value);
-  if(!ids.length){toast('⚠️ Mẹ hãy tích chọn ít nhất 1 việc để xóa nhé');return}
-  askConfirm('Xóa các việc đã chọn',`Mẹ muốn xóa <b>${ids.length} việc</b> đã chọn trong ngày ${fmtVN(date)}?`,()=>{
-    D()[date]=dayItems(date).filter(x=>!ids.includes(x.id));
-    save('dtasks');renderAdmin();toast(`🗑 Đã xóa ${ids.length} việc`);
-  },'Xóa ngay',true);
-};
+// Khi bấm "Xóa" -> Hỏi: Xoá chỉ ngày này HAY Xoá toàn bộ việc này (từ ngày này trở về sau)
+function delTask(date,id){
+  const t=dayItems(date).find(x=>x.id===id);if(!t)return;
+  $('m-title').textContent=`🗑 Xóa việc "${t.text}"?`;
+  $('m-body').innerHTML=`<p style="margin:0;color:var(--soft);font-size:.9rem">Mẹ muốn xóa việc này chỉ trong ngày <b>${fmtVN(date)}</b> hay xóa hẳn từ ngày <b>${fmtVN(date)} trở về sau</b>?</p>`;
+  $('m-acts').innerHTML=`
+    <button type="button" class="btn main" id="del-only-day">📅 Chỉ xóa ngày này (${fmtVN(date)})</button>
+    <button type="button" class="btn bad" id="del-from-now">⏩ Xóa toàn bộ task này (từ ${fmtVN(date)} trở về sau)</button>
+    <button type="button" class="btn" id="del-cancel">Hủy</button>
+  `;
+  $('modal-bg').classList.remove('hide');
+  $('del-cancel').onclick=closeModal;
 
-// Xoá sạch toàn bộ việc của ngày đang chọn
-$('day-del-all').onclick=()=>{
-  const date=$('vday').value||TODAY;
-  const items=tasksFor(date);
-  if(!items.length){toast('Ngày này không có việc nào để xóa');return}
-  askConfirm('Xóa sạch việc trong ngày',`Xóa toàn bộ <b>${items.length} việc</b> của ngày ${fmtVN(date)}?`,()=>{
-    D()[date]=[];
-    save('dtasks');renderAdmin();toast(`🗑 Đã xóa sạch việc ngày ${fmtVN(date)}`);
-  },'Xóa sạch',true);
-};
+  // Lựa chọn 1: Chỉ xoá ngày này
+  $('del-only-day').onclick=()=>{
+    D()[date]=dayItems(date).filter(x=>x.id!==id);
+    closeModal();save('dtasks');renderAdmin();
+    toast(`✅ Đã xóa ở ngày ${fmtVN(date)}`);
+  };
 
-// Modal Sửa việc (cho phép sửa 1 ngày hoặc sửa toàn bộ chuỗi lặp lại)
-function openEditTaskModal(date,id){
-  const list=dayItems(date),t=list.find(x=>x.id===id);if(!t)return;
-  const gCount=gidDays(t);
+  // Lựa chọn 2: Xoá toàn bộ task này từ ngày đó trở về sau
+  $('del-from-now').onclick=()=>{
+    let count=0;
+    Object.keys(D()).forEach(d=>{
+      if(d>=date){
+        const before=(D()[d]||[]).length;
+        D()[d]=(D()[d]||[]).filter(x=>!(x.id===t.id||(t.gid&&x.gid===t.gid)||x.text===t.text));
+        count+=before-D()[d].length;
+      }
+    });
+    // Nếu là việc nằm trong lịch mẫu mặc định thì đánh dấu dừng từ ngày này trở về sau
+    const wd=parse(date).getDay();
+    if((S.sched&&S.sched[wd]||[]).some(x=>x.id===t.id||x.text===t.text)){
+      S.cutoffs=S.cutoffs||{};
+      S.cutoffs[wd]=S.cutoffs[wd]||{};
+      S.cutoffs[wd][t.id]=date;
+      save('dtasks','cutoffs');
+    }else{
+      save('dtasks');
+    }
+    closeModal();renderAdmin();
+    toast(`🗑 Đã xóa toàn bộ "${t.text}" từ ${fmtVN(date)} trở về sau!`);
+  };
+}
+
+// Khi bấm "Sửa" -> Cũng cho chọn Sửa chỉ ngày này hoặc Sửa từ ngày này trở về sau
+function editTask(date,id){
+  const t=dayItems(date).find(x=>x.id===id);if(!t)return;
   $('m-title').textContent='✏️ Sửa công việc';
   $('m-body').innerHTML=`
     <label>Tên việc</label>
     <input type="text" id="ed-txt" value="${esc(t.text)}">
     ${t.typing
       ? `<label>Số phút luyện typing</label><input type="number" id="ed-min" min="1" value="${t.typing}">`
-      : `<label>Link bài làm (để trống nếu bỏ link)</label><input type="text" id="ed-lnk" value="${esc(t.link||'')}">`
+      : `<label>Link làm bài (để trống = bỏ link)</label><input type="text" id="ed-lnk" value="${esc(t.link||'')}">`
     }
-    ${gCount>1?`<label style="display:flex;align-items:center;gap:8px;color:var(--ink);margin-top:6px;cursor:pointer">
-      <input type="checkbox" id="ed-all" checked style="width:18px;height:18px;accent-color:#f78fb3">
-      <span>Áp dụng sửa cho tất cả <b>${gCount} ngày</b> của chuỗi việc này</span>
-    </label>`:''}
   `;
   $('m-acts').innerHTML=`
-    <button type="button" class="btn sm" id="ed-cancel">Hủy</button>
-    <button type="button" class="btn sm main" id="ed-save">Lưu thay đổi</button>
+    <button type="button" class="btn main" id="ed-only-day">💾 Lưu chỉ ngày này (${fmtVN(date)})</button>
+    <button type="button" class="btn mint" id="ed-from-now">⏩ Lưu cho toàn bộ từ ${fmtVN(date)} trở về sau</button>
+    <button type="button" class="btn" id="ed-cancel">Hủy</button>
   `;
   $('modal-bg').classList.remove('hide');
   $('ed-cancel').onclick=closeModal;
-  $('ed-save').onclick=()=>{
+
+  const applyEdit=fromNow=>{
     const nt=$('ed-txt').value.trim()||t.text;
     const nm=t.typing?Math.max(1,+$('ed-min').value||t.typing):0;
     const nl=t.typing?'':normLink($('ed-lnk').value);
-    const applyAll=gCount>1&&$('ed-all')&&$('ed-all').checked;
-    Object.keys(D()).forEach(d=>(D()[d]||[]).forEach(x=>{
-      if(x===t||(applyAll&&x.gid===t.gid)){
-        x.text=nt;
-        if(x.typing)x.typing=nm;
-        else{if(nl)x.link=nl;else delete x.link}
+    Object.keys(D()).forEach(d=>{
+      if(d===date||(fromNow&&d>=date)){
+        (D()[d]||[]).forEach(x=>{
+          if(x===t||(fromNow&&(x.id===t.id||(t.gid&&x.gid===t.gid)||x.text===t.text))){
+            x.text=nt;
+            if(x.typing)x.typing=nm;
+            else{if(nl)x.link=nl;else delete x.link}
+          }
+        });
       }
-    }));
-    closeModal();save('dtasks');renderAdmin();toast('✅ Đã cập nhật công việc');
-  };
-}
-
-// Modal Xoá 1 việc (hỏi xoá 1 ngày hay xoá cả chuỗi lặp lại)
-function openDelTaskModal(date,id){
-  const list=dayItems(date),t=list.find(x=>x.id===id);if(!t)return;
-  const gCount=gidDays(t);
-  $('m-title').textContent='🗑 Xóa công việc';
-  $('m-body').innerHTML=`<p style="margin:0 0 8px">Mẹ muốn xóa việc <b>"${esc(t.text)}"</b>?</p>
-    ${gCount>1?`<p style="margin:0;font-size:.86rem;color:var(--soft)">Việc này nằm trong chuỗi lặp lại <b>${gCount} ngày</b>.</p>`:''}`;
-  $('m-acts').innerHTML=`
-    <button type="button" class="btn sm" id="dt-cancel">Hủy</button>
-    <button type="button" class="btn sm bad" id="dt-one">Chỉ xóa ngày ${fmtVN(date)}</button>
-    ${gCount>1?`<button type="button" class="btn sm bad" id="dt-all">🔥 Xóa ở tất cả ${gCount} ngày</button>`:''}
-  `;
-  $('modal-bg').classList.remove('hide');
-  $('dt-cancel').onclick=closeModal;
-  $('dt-one').onclick=()=>{
-    D()[date]=(D()[date]||[]).filter(x=>x.id!==id);
-    closeModal();save('dtasks');renderAdmin();toast('🗑 Đã xóa việc trong ngày');
-  };
-  if(gCount>1){
-    $('dt-all').onclick=()=>{
-      Object.keys(D()).forEach(d=>{D()[d]=(D()[d]||[]).filter(x=>x.gid!==t.gid)});
-      closeModal();save('dtasks');renderAdmin();toast(`🗑 Đã xóa chuỗi việc ở ${gCount} ngày`);
-    };
-  }
-}
-
-/* --- TAB 2B: QUẢN LÝ & XOÁ HÀNG LOẠT THEO CHUỖI VIỆC ĐÃ TẠO (SERIES / GID) --- */
-function renderSeriesAdmin(){
-  const map=new Map();
-  Object.entries(D()).forEach(([date,arr])=>{
-    (arr||[]).forEach(t=>{
-      const key=t.gid||('single_'+date+'_'+t.id);
-      if(!map.has(key))map.set(key,{key,gid:t.gid,text:t.text,typing:t.typing,rule:t.rule||'',dates:[],refs:[]});
-      const g=map.get(key);
-      g.dates.push(date);
-      g.refs.push({date,id:t.id});
     });
-  });
-  const groups=[...map.values()].sort((a,b)=>(a.dates[0]||'').localeCompare(b.dates[0]||''));
-  $('ser-chk-all').checked=false;
-  $('ser-sel-cnt').textContent='0';
+    closeModal();save('dtasks');renderAdmin();toast('✅ Đã lưu thay đổi');
+  };
+  $('ed-only-day').onclick=()=>applyEdit(false);
+  $('ed-from-now').onclick=()=>applyEdit(true);
+}
 
-  if(!groups.length){
-    $('aseries').innerHTML='<p class="sub">Chưa có chuỗi công việc nào được tạo trên lịch.</p>';
-    return;
+// Nút "+ Giao việc"
+$('addtask').onclick=()=>{
+  const v=$('ntask').value.trim();
+  if(!v){toast('⚠️ Nhập tên việc nhé');$('ntask').focus();return}
+  const from=$('dfrom').value;
+  if(!from){toast('⚠️ Chọn ngày làm bài nhé');return}
+
+  const mn=+$('nmin').value||0,lk=normLink($('ntlink').value),gid=uid();
+  let n=0,k=0;
+
+  if(!repeatOn){
+    // Chỉ giao đúng 1 ngày đã chọn trên lịch
+    const it={id:uid(),text:v,gid};
+    if(mn)it.typing=mn;else if(lk)it.link=lk;
+    dayItems(from).push(it);
+    n=1;
+  }else{
+    const to=$('dto').value||from;
+    if(to<from){toast('⚠️ Ngày kết thúc (Until) phải sau ngày bắt đầu');return}
+    const mode=$('rep-day').value;
+    let wds=[];
+    if(mode==='all') wds=[0,1,2,3,4,5,6];
+    else if(mode==='wk') wds=[1,2,3,4,5];
+    else if(mode==='we') wds=[0,6];
+    else if(mode==='custom') wds=[...document.querySelectorAll('.wdc:checked')].map(c=>+c.value);
+    else wds=[+mode];
+
+    for(const d=parse(from);ds(d)<=to&&k++<730;d.setDate(d.getDate()+1)){
+      if(!wds.includes(d.getDay()))continue;
+      const it={id:uid(),text:v,gid};
+      if(mn)it.typing=mn;else if(lk)it.link=lk;
+      dayItems(ds(d)).push(it);
+      n++;
+    }
   }
 
-  $('aseries').innerHTML=groups.map(g=>{
-    g.dates.sort();
-    const spanTxt=g.dates.length>1?`${fmtVN(g.dates[0])} → ${fmtVN(g.dates[g.dates.length-1])} (${g.dates.length} buổi)`:`Ngày ${fmtVN(g.dates[0])}`;
-    return `<div class="bulk-item">
-      <label>
-        <input type="checkbox" class="ser-item-chk" value="${esc(g.key)}">
-        <span>
-          ${g.typing?'⌨️ ':'📝 '}<b>${esc(g.text)}</b>
-          <span class="badge rep">${g.dates.length} ngày</span>
-          <small style="display:block;color:var(--soft)">📅 ${esc( g.rule || spanTxt )}</small>
-        </span>
-      </label>
-      <button type="button" class="btn xs bad" data-delser="${esc(g.key)}">Xóa chuỗi</button>
-    </div>`;
-  }).join('');
-
-  const updateSerCnt=()=>{
-    $('ser-sel-cnt').textContent=[...$('aseries').querySelectorAll('.ser-item-chk:checked')].length;
-  };
-  $('aseries').querySelectorAll('.ser-item-chk').forEach(cb=>cb.onchange=updateSerCnt);
-  $('ser-chk-all').onchange=e=>{
-    $('aseries').querySelectorAll('.ser-item-chk').forEach(cb=>cb.checked=e.target.checked);
-    updateSerCnt();
-  };
-
-  const deleteByKeys=keysToDel=>{
-    const set=new Set(keysToDel);
-    let removed=0;
-    Object.keys(D()).forEach(date=>{
-      const before=(D()[date]||[]).length;
-      D()[date]=(D()[date]||[]).filter(t=>{
-        const k=t.gid||('single_'+date+'_'+t.id);
-        return !set.has(k);
-      });
-      removed+=before-D()[date].length;
-    });
-    save('dtasks');renderAdmin();
-    toast(`🗑 Đã xóa ${removed} bài tập thuộc ${keysToDel.length} chuỗi!`);
-  };
-
-  $('aseries').querySelectorAll('[data-delser]').forEach(b=>b.onclick=()=>{
-    const g=map.get(b.dataset.delser);if(!g)return;
-    askConfirm('Xóa cả chuỗi công việc',`Xóa <b>"${esc(g.text)}"</b> ở tất cả <b>${g.dates.length} ngày</b>?`,()=>deleteByKeys([g.key]),'Xóa chuỗi',true);
-  });
-
-  $('ser-del-sel').onclick=()=>{
-    const keys=[...$('aseries').querySelectorAll('.ser-item-chk:checked')].map(c=>c.value);
-    if(!keys.length){toast('⚠️ Mẹ hãy tích chọn ít nhất 1 chuỗi để xóa nhé');return}
-    askConfirm('Xóa hàng loạt chuỗi việc',`Mẹ có chắc muốn xóa <b>${keys.length} chuỗi việc</b> đã chọn không?`,()=>deleteByKeys(keys),'Xóa hàng loạt',true);
-  };
-}
-
-/* --- TAB 2C: LỌC & XOÁ HÀNG LOẠT THEO KHOẢNG NGÀY / TỪ KHOÁ --- */
-['rfrom','rto'].forEach(id=>$(id).addEventListener('change',renderRangeAdmin));
-$('rkw').addEventListener('input',renderRangeAdmin);
-
-function renderRangeAdmin(){
-  const from=$('rfrom').value||'0000-01-01';
-  const to=$('rto').value||'9999-12-31';
-  const kw=($('rkw').value||'').trim().toLowerCase();
-  const matches=[];
-
-  Object.keys(D()).sort().forEach(date=>{
-    if(date<from||date>to)return;
-    (D()[date]||[]).forEach(t=>{
-      if(kw&&!t.text.toLowerCase().includes(kw))return;
-      matches.push({date,t});
-    });
-  });
-
-  $('rng-total-cnt').textContent=matches.length;
-  $('rng-chk-all').checked=false;
-  $('rng-sel-cnt').textContent='0';
-
-  if(!matches.length){
-    $('arange').innerHTML='<p class="sub">Không tìm thấy công việc nào trong khoảng thời gian này.</p>';
-    return;
-  }
-
-  $('arange').innerHTML=matches.map(({date,t})=>{
-    const dt=parse(date);
-    return `<div class="bulk-item">
-      <label>
-        <input type="checkbox" class="rng-item-chk" value="${date}|${t.id}">
-        <span>
-          <span class="badge">${DN[dt.getDay()]}, ${fmtVN(date)}</span>
-          ${t.typing?'⌨️ ':'📝 '}<b>${esc(t.text)}</b>
-        </span>
-      </label>
-    </div>`;
-  }).join('');
-
-  const updateRngCnt=()=>{
-    $('rng-sel-cnt').textContent=[...$('arange').querySelectorAll('.rng-item-chk:checked')].length;
-  };
-  $('arange').querySelectorAll('.rng-item-chk').forEach(cb=>cb.onchange=updateRngCnt);
-  $('rng-chk-all').onchange=e=>{
-    $('arange').querySelectorAll('.rng-item-chk').forEach(cb=>cb.checked=e.target.checked);
-    updateRngCnt();
-  };
-}
-
-$('rng-del-sel').onclick=()=>{
-  const picked=[...$('arange').querySelectorAll('.rng-item-chk:checked')].map(c=>c.value);
-  if(!picked.length){toast('⚠️ Mẹ hãy tích chọn các mục cần xóa nhé');return}
-  askConfirm('Xóa hàng loạt công việc',`Xóa vĩnh viễn <b>${picked.length} công việc</b> đã chọn?`,()=>{
-    const byDate={};
-    picked.forEach(p=>{const[d,id]=p.split('|');(byDate[d]=byDate[d]||new Set()).add(id)});
-    Object.entries(byDate).forEach(([d,idSet])=>{
-      D()[d]=(D()[d]||[]).filter(x=>!idSet.has(x.id));
-    });
-    save('dtasks');renderAdmin();toast(`🗑 Đã xóa hàng loạt ${picked.length} việc!`);
-  },'Xóa hàng loạt',true);
+  if(!n){toast('⚠️ Không có ngày nào khớp với thứ đã chọn');return}
+  $('ntask').value='';$('ntlink').value='';$('nmin').value='';
+  $('vday').value=from;
+  save('dtasks');renderAdmin();
+  toast(`✅ Đã giao việc cho ${n} ngày`);
 };
 
 /* ---------- QUẢN LÝ BÀI TYPING & CÀI ĐẶT ---------- */
@@ -1549,12 +1097,7 @@ let editId=null;
 const hasRes=(r,l)=>r.lessonId===l.id||(!r.lessonId&&r.lesson===l.title);
 
 function renderAdmin(){
-  $('use-def-sched').checked=S.useDefaultSched!==false;
-  updateAssignPreview();
-  renderOverviewCal();
-  if(manageTab==='day')renderDateAdmin();
-  if(manageTab==='series')renderSeriesAdmin();
-  if(manageTab==='range')renderRangeAdmin();
+  renderDateAdmin();
   renderFolderAdmin();
 
   const sm=storyMap();
